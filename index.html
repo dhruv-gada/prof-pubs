@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Faculty Publication Analyzer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light;
+  --bg:#f6f5f2; --surface:#fcfcfb; --surface-2:#f0efeb; --border:#e2e0da;
+  --text:#0b0b0b; --text-2:#52514e; --muted:#7c7a74;
+  --accent:#2a78d6; --accent-soft:#e6f0fb;
+  --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a;
+  --good:#0f7b3d; --warn:#9a6400; --bad:#b42318;
+  --radius:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    color-scheme: dark;
+    --bg:#121211; --surface:#1a1a19; --surface-2:#232321; --border:#33322f;
+    --text:#f0efec; --text-2:#c3c2b7; --muted:#8f8d86;
+    --accent:#3987e5; --accent-soft:#1c2b3e;
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70;
+    --good:#4cc27e; --warn:#e0a63a; --bad:#f07167;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.5}
+a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;margin:0;line-height:1.2}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 20px 80px}
+header.top{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+header.top h1{font-size:28px}
+header.top p{margin:4px 0 0;color:var(--text-2);max-width:640px}
+.btn{font:inherit;font-size:14px;border:1px solid var(--border);background:var(--surface);color:var(--text);padding:8px 14px;border-radius:8px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.btn.small{padding:5px 10px;font-size:13px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
+.searchbar{display:grid;grid-template-columns:1fr 220px 150px auto;gap:10px;align-items:end}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:600;color:var(--text-2);text-transform:uppercase;letter-spacing:.04em}
+input[type=text],input[type=password],select{font:inherit;font-size:15px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);width:100%}
+input:focus,select:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.roster{margin-top:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.roster h3{font-family:Inter,sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:0 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:13px;border:1px solid var(--border);background:var(--bg);color:var(--text);padding:5px 10px;border-radius:999px;cursor:pointer}
+.chip:hover,.chip.on{border-color:var(--accent);background:var(--accent-soft)}
+.settings{margin-top:14px;display:none;gap:12px;grid-template-columns:1fr 1fr auto;align-items:end}
+.settings.open{display:grid}
+.note{font-size:13px;color:var(--text-2)}
+.status{margin:18px 0;font-size:14px;color:var(--text-2);min-height:20px}
+.status .err{color:var(--bad)}
+.status .warn{color:var(--warn)}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;vertical-align:-2px;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hidden{display:none!important}
+.profile{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.profile h2{font-size:26px}
+.profile .meta{color:var(--text-2);font-size:14px;margin-top:4px}
+.links{display:flex;gap:8px;flex-wrap:wrap}
+.cands{margin-top:14px;border-top:1px solid var(--border);padding-top:12px}
+.cands summary{cursor:pointer;font-size:13px;color:var(--text-2)}
+.cand{display:flex;gap:10px;align-items:flex-start;padding:6px 0;font-size:13px}
+.cand input{margin-top:3px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px}
+.kpi .v{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums}
+.kpi .l{font-size:12px;color:var(--text-2);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+.kpi .s{font-size:12px;color:var(--muted);margin-top:2px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.card h3{font-size:18px;margin-bottom:4px}
+.card .sub{font-size:13px;color:var(--text-2);margin-bottom:12px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--text-2);margin-bottom:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+svg text{fill:var(--text-2);font-family:Inter,sans-serif}
+.hbar{display:grid;grid-template-columns:minmax(0,1fr) 40px;gap:4px 10px;align-items:center;font-size:13px}
+.hbar .lab{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbar .track{grid-column:1/2;height:6px;background:var(--surface-2);border-radius:3px;margin-bottom:6px;overflow:hidden}
+.hbar .fill{height:100%;background:var(--s1);border-radius:3px}
+.hbar .num{grid-row:span 2;text-align:right;font-variant-numeric:tabular-nums;color:var(--text);font-weight:600}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid var(--border);color:var(--text-2);margin-right:4px;white-space:nowrap}
+.tag.up{border-color:var(--good);color:var(--good)}
+.tag.down{border-color:var(--muted);color:var(--muted)}
+.summary{font-size:15px;line-height:1.65}
+.summary li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--border);vertical-align:top}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-2);cursor:pointer;user-select:none;white-space:nowrap}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.ptitle{font-weight:500;color:var(--text)}
+.pmeta{color:var(--muted);font-size:12px;margin-top:2px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.filters input,.filters select{width:auto;font-size:13px;padding:6px 10px}
+.filters input[type=text]{flex:1;min-width:160px}
+.tablewrap{overflow-x:auto}
+#tip{position:fixed;pointer-events:none;background:var(--text);color:var(--surface);font-size:12px;padding:6px 9px;border-radius:6px;z-index:10;opacity:0;transition:opacity .1s;max-width:260px}
+footer{margin-top:30px;font-size:12px;color:var(--muted)}
+@media (max-width:760px){
+  .searchbar{grid-template-columns:1fr 1fr}
+  .searchbar .full{grid-column:1/-1}
+  .grid2{grid-template-columns:1fr}
+  .settings.open{grid-template-columns:1fr}
+  .col-hide{display:none}
+  header.top h1{font-size:23px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Faculty Publication Analyzer</h1>
+      <p>Type a professor's name to see what they've published in recent years: output, citations, authorship role, research themes, collaborators and journals. Every paper links out to Google Scholar.</p>
+    </div>
+    <div class="links">
+      <button class="btn small" id="compareBtn" title="Run a summary for every professor on the list">Compare everyone on the list</button>
+      <button class="btn small" id="settingsBtn">Data settings</button>
+    </div>
+  </header>
+
+  <section class="card">
+    <form id="searchForm" class="searchbar" autocomplete="off">
+      <label class="f full">Professor name
+        <input type="text" id="nameInput" placeholder="e.g. Braden C. Fleming" list="rosterList">
+      </label>
+      <label class="f">Institution hint
+        <input type="text" id="instInput" value="Brown University">
+      </label>
+      <label class="f">Window
+        <select id="yearsSel"><option value="3">Last 3 years</option><option value="5" selected>Last 5 years</option><option value="10">Last 10 years</option></select>
+      </label>
+      <button class="btn primary" type="submit">Analyze</button>
+    </form>
+    <datalist id="rosterList"></datalist>
+
+    <div class="settings" id="settings">
+      <label class="f">OpenAlex API key (free)
+        <input type="password" id="keyInput" placeholder="Paste key from openalex.org/settings/api">
+      </label>
+      <label class="f">Your email (optional, for NCBI/PubMed etiquette)
+        <input type="text" id="emailInput" placeholder="you@example.com">
+      </label>
+      <button class="btn" id="saveSettings" type="button">Save</button>
+      <div class="note" style="grid-column:1/-1">
+        Citations, topics and h-index come from <a href="https://openalex.org" target="_blank" rel="noopener">OpenAlex</a>, which needs a free API key (create an account, then copy it from <a href="https://openalex.org/settings/api" target="_blank" rel="noopener">openalex.org/settings/api</a>). Without a key the site still works from PubMed alone, just without citation counts. Settings stay in this browser only.
+      </div>
+    </div>
+
+    <div class="roster" id="roster"></div>
+  </section>
+
+  <div class="status" id="status"></div>
+
+  <!-- Single professor results -->
+  <section id="results" class="hidden">
+    <div class="card">
+      <div class="profile">
+        <div>
+          <h2 id="pName"></h2>
+          <div class="meta" id="pMeta"></div>
+        </div>
+        <div class="links" id="pLinks"></div>
+      </div>
+      <details class="cands" id="candBox">
+        <summary id="candSummary">Author profiles matched</summary>
+        <div class="note" style="margin:8px 0">Common names can have several profiles, and one person is sometimes split across two. Tick every profile that is this professor, then re-run.</div>
+        <div id="candList"></div>
+        <label class="note" style="display:flex;gap:6px;align-items:center;margin:8px 0">
+          <input type="checkbox" id="strictAff"> Only count papers where this author lists the institution hint (stricter, helps with common names)
+        </label>
+        <button class="btn small" id="rerunBtn" type="button">Re-run with selected profiles</button>
+      </details>
+    </div>
+
+    <div class="kpis" id="kpis"></div>
+
+    <div class="card" style="margin-bottom:16px">
+      <h3>At a glance</h3>
+      <ul class="summary" id="summaryList"></ul>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>Papers per year</h3>
+        <div class="sub">By this professor's position on the author list</div>
+        <div class="legend"><span><i style="background:var(--s1)"></i>Last (senior) author</span><span><i style="background:var(--s2)"></i>First author</span><span><i style="background:var(--s3)"></i>Middle author</span></div>
+        <div id="chartYears"></div>
+      </div>
+      <div class="card">
+        <h3>Citations received per year</h3>
+        <div class="sub" id="citeSub">All of their work, career-wide (OpenAlex)</div>
+        <div id="chartCites"></div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>Research themes</h3>
+        <div class="sub">Main topic of each paper. <span class="tag up">rising</span> = bigger share in the last 2 years</div>
+        <div id="topics"></div>
+      </div>
+      <div class="card">
+        <h3>Where they publish</h3>
+        <div class="sub">Journals and venues, by number of papers</div>
+        <div id="venues"></div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3>Frequent collaborators</h3>
+        <div class="sub">Co-authors on the most papers in the window</div>
+        <div id="coauthors"></div>
+      </div>
+      <div class="card">
+        <h3>Most-cited recent papers</h3>
+        <div class="sub">Papers from the window, by citations so far</div>
+        <div id="topCited"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap">
+        <h3>All publications in the window</h3>
+        <div class="links">
+          <button class="btn small" id="copyCsv" type="button">Copy as CSV</button>
+          <button class="btn small" id="dlCsv" type="button">Download CSV</button>
+        </div>
+      </div>
+      <div class="filters" style="margin-top:10px">
+        <input type="text" id="fText" placeholder="Filter by title, journal or co-author">
+        <select id="fYear"><option value="">All years</option></select>
+        <select id="fRole"><option value="">Any role</option><option value="last">Senior (last)</option><option value="first">First</option><option value="middle">Middle</option></select>
+      </div>
+      <div class="tablewrap">
+        <table id="pubTable">
+          <thead><tr><th data-k="title">Paper</th><th data-k="year" class="n">Year</th><th data-k="role" class="col-hide">Role</th><th data-k="cites" class="n">Cites</th><th class="col-hide">Links</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap"><button class="btn small hidden" id="moreBtn" type="button">Show more</button><span class="note" id="tableNote"></span></div>
+    </div>
+  </section>
+
+  <!-- Compare all -->
+  <section id="compare" class="hidden">
+    <div class="card">
+      <h3>Everyone on the list, side by side</h3>
+      <div class="sub" id="compareSub"></div>
+      <div class="tablewrap">
+        <table id="cmpTable">
+          <thead><tr>
+            <th data-k="name">Professor</th>
+            <th data-k="papers" class="n">Papers</th>
+            <th data-k="senior" class="n">Senior-author</th>
+            <th data-k="perYear" class="n">Per year</th>
+            <th data-k="cites" class="n">Citations to these</th>
+            <th data-k="h" class="n col-hide">Career h-index</th>
+            <th data-k="topic" class="col-hide">Main theme</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="note" style="margin-top:8px">Tap a name to open the full analysis. Profiles are picked automatically here, so check the full view for common names.</div>
+    </div>
+  </section>
+
+  <footer>
+    Data: OpenAlex (works, citations, topics, h-index) and PubMed (NCBI E-utilities), queried live from your browser. Google Scholar has no public API, so it is linked rather than queried; its citation counts usually run 10–40% higher than OpenAlex. Figures are for screening, not formal evaluation.
+  </footer>
+</div>
+<div id="tip"></div>
+
+<script>
+/* ---------------- Roster ---------------- */
+const ROSTER = [
+  {group:"Joint, cartilage & bone biology", people:[
+    ["Qian Chen","Orthopaedics, Vice Chair of Research","Cartilage matrix biology; matrilin-3 and OA biologics"],
+    ["Chathuraka Jayasuriya","Orthopaedics","Cartilage progenitor cells; regenerative strategies"],
+    ["Lei Wei","Orthopaedics (Research)","Cartilage degeneration; intra-articular therapy"],
+    ["Wentian Yang","Medicine & Orthopaedics","Bone and cartilage development; skeletal repair"],
+    ["Eric Darling","Medical Science, Engineering & Orthopaedics","Stem cells, single-cell mechanics, regeneration"],
+    ["Jay Trivedi","Orthopaedics (Research)","Musculoskeletal tissue repair"],
+    ["Gregory D. Jay","Emergency Medicine & Engineering","Recombinant lubricin (PRG4) for joint disease"]]},
+  {group:"Biomechanics, implants & outcomes", people:[
+    ["Braden C. Fleming","Orthopaedics & Engineering","Ligament repair; bridge-enhanced ACL repair; PTOA"],
+    ["Joseph J. Crisco","Orthopaedics, Exec. Director of Research","Joint kinematics; implant evaluation"],
+    ["Jillian Beveridge","Orthopaedics & Engineering","In vivo joint mechanics; imaging outcomes"],
+    ["Douglas Moore","Orthopaedics","Device testing; preclinical biomechanics"],
+    ["Alan H. Daniels","Orthopaedics, Spine Division Chief","Spinal deformity instrumentation and outcomes"],
+    ["Brett D. Owens","Orthopaedics & Epidemiology","Sports injury technique, implants, outcomes"]]},
+  {group:"Muscle & neuromuscular aging", people:[
+    ["Gregorio Valdez","Molecular Biology, Cell Biology & Biochemistry","Neuromuscular junction aging and ALS"]]}
+];
+const ROSTER_FLAT = ROSTER.flatMap(g=>g.people.map(p=>({name:p[0],dept:p[1],focus:p[2],group:g.group})));
+
+/* ---------------- Settings ---------------- */
+const store = {
+  get(k,d=""){try{return localStorage.getItem("fpa_"+k) ?? d}catch(e){return d}},
+  set(k,v){try{localStorage.setItem("fpa_"+k,v)}catch(e){}}
+};
+const $ = s=>document.querySelector(s);
+const esc = s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = n=>n==null?"–":Number(n).toLocaleString("en-US");
+
+$("#keyInput").value = store.get("key");
+$("#emailInput").value = store.get("email");
+$("#settingsBtn").onclick = ()=>$("#settings").classList.toggle("open");
+$("#saveSettings").onclick = ()=>{
+  store.set("key",$("#keyInput").value.trim()); store.set("email",$("#emailInput").value.trim());
+  setStatus("Settings saved."); $("#settings").classList.remove("open");
+};
+if(!store.get("key")) $("#settings").classList.add("open");
+
+function renderRoster(){
+  $("#roster").innerHTML = ROSTER.map(g=>`<div><h3>${esc(g.group)}</h3><div class="chips">${
+    g.people.map(p=>`<button class="chip" type="button" data-name="${esc(p[0])}" title="${esc(p[1]+' · '+p[2])}">${esc(p[0])}</button>`).join("")}</div></div>`).join("");
+  $("#rosterList").innerHTML = ROSTER_FLAT.map(p=>`<option value="${esc(p.name)}">`).join("");
+  document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{ $("#nameInput").value=b.dataset.name; runSearch(); });
+}
+renderRoster();
+
+/* ---------------- Status / tooltip ---------------- */
+function setStatus(html,loading=false){ $("#status").innerHTML = (loading?'<span class="spinner"></span>':"")+html; }
+const tip = $("#tip");
+function showTip(e,html){ tip.innerHTML=html; tip.style.opacity=1; moveTip(e); }
+function moveTip(e){ const x=Math.min(e.clientX+12, window.innerWidth-270); tip.style.left=x+"px"; tip.style.top=(e.clientY+12)+"px"; }
+function hideTip(){ tip.style.opacity=0; }
+
+/* ---------------- Name helpers ---------------- */
+const strip = s=>s.normalize("NFD").replace(/[̀-ͯ]/g,"");
+function parseName(full){
+  const clean = strip(full).replace(/\([^)]*\)/g," ").replace(/[.,]/g," ").replace(/\b(Dr|Prof|PhD|MD|Jr|Sr)\b/gi," ").trim().split(/\s+/);
+  const last = clean[clean.length-1]||"", first = clean[0]||"";
+  const middles = clean.slice(1,-1);
+  return {first,last,middles,initials:(first[0]||"")+middles.map(m=>m[0]).join("")};
+}
+// normalized key "last f" for coauthor de-dup across sources
+function keyFromDisplay(n){ const p=parseName(n); return (p.last+" "+(p.first[0]||"")).toLowerCase(); }
+function keyFromPubmed(n){ const parts=strip(n).trim().split(/\s+/); const ini=parts.pop()||""; return (parts.join(" ")+" "+ini[0]).toLowerCase(); }
+
+/* ---------------- Fetch helpers ---------------- */
+async function getJSON(url, tries=3){
+  for(let i=0;i<tries;i++){
+    let r;
+    try{ r = await fetch(url); }catch(e){ if(i===tries-1) throw new Error("network"); await sleep(600*(i+1)); continue; }
+    if(r.ok) return r.json();
+    if(r.status===429 && i<tries-1){ await sleep(1200*(i+1)); continue; }
+    const err = new Error("HTTP "+r.status); err.status=r.status; throw err;
+  }
+}
+const sleep = ms=>new Promise(r=>setTimeout(r,ms));
+function oa(path, params){
+  const u = new URL("https://api.openalex.org/"+path);
+  Object.entries(params).forEach(([k,v])=>u.searchParams.set(k,v));
+  const key = store.get("key"); if(key) u.searchParams.set("api_key",key);
+  return getJSON(u.toString());
+}
+let lastNcbi = 0;
+async function ncbi(tool, params){
+  const wait = 380 - (Date.now()-lastNcbi); if(wait>0) await sleep(wait); lastNcbi = Date.now();
+  const u = new URL("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"+tool+".fcgi");
+  Object.entries({db:"pubmed",retmode:"json",tool:"faculty-pub-analyzer",...params}).forEach(([k,v])=>u.searchParams.set(k,v));
+  const em = store.get("email"); if(em) u.searchParams.set("email",em);
+  return getJSON(u.toString());
+}
+const shortId = id=>String(id||"").replace("https://openalex.org/","");
+
+/* ---------------- OpenAlex ---------------- */
+function instMatches(text, hint){
+  if(!hint) return false;
+  const t = strip(String(text||"")).toLowerCase();
+  const words = strip(hint).toLowerCase().split(/\s+/).filter(w=>w.length>2 && !["university","the","of","and","school","college","institute"].includes(w));
+  if(!words.length) return t.includes(strip(hint).toLowerCase());
+  return words.every(w=>t.includes(w));
+}
+async function findAuthors(name, hint){
+  const data = await oa("authors",{search:name, per_page:"15",
+    select:"id,display_name,display_name_alternatives,orcid,works_count,cited_by_count,summary_stats,last_known_institutions,affiliations,topics,counts_by_year"});
+  const p = parseName(name);
+  const res = (data.results||[]).map(a=>{
+    const insts = [...(a.last_known_institutions||[]).map(i=>i.display_name), ...(a.affiliations||[]).map(x=>x.institution?.display_name)].filter(Boolean);
+    const recentAff = (a.affiliations||[]).filter(x=>(x.years||[]).some(y=>y>=new Date().getFullYear()-6)).map(x=>x.institution?.display_name);
+    const ap = parseName(a.display_name);
+    let score = 0;
+    if(insts.some(i=>instMatches(i,hint))) score += 50;
+    if(recentAff.some(i=>instMatches(i,hint))) score += 20;
+    if(ap.last.toLowerCase()===p.last.toLowerCase()) score += 10;
+    if(ap.first.toLowerCase()===p.first.toLowerCase()) score += 10;
+    if(p.middles.length && ap.middles.length && ap.middles[0][0].toLowerCase()===p.middles[0][0].toLowerCase()) score += 5;
+    score += Math.min(10, Math.log10((a.works_count||0)+1)*3);
+    return {...a, insts:[...new Set(insts)], score, affMatch: insts.some(i=>instMatches(i,hint))};
+  }).filter(a=>parseName(a.display_name).last.toLowerCase()===p.last.toLowerCase() || a.score>=50)
+    .sort((x,y)=>y.score-x.score);
+  // default selection: every affiliated match; else the top one
+  const aff = res.filter(a=>a.affMatch);
+  res.forEach(a=>a.selected = aff.length ? a.affMatch : a===res[0]);
+  return res;
+}
+async function fetchWorks(authorIds, fromYear){
+  const out=[]; let cursor="*", pages=0;
+  while(cursor && pages<8){
+    const d = await oa("works",{filter:`authorships.author.id:${authorIds.join("|")},from_publication_date:${fromYear}-01-01`,
+      per_page:"200", cursor, sort:"publication_date:desc",
+      select:"id,doi,display_name,publication_year,publication_date,cited_by_count,primary_location,authorships,topics,type,open_access,ids"});
+    out.push(...(d.results||[])); cursor = d.meta?.next_cursor; pages++;
+    if(!d.results?.length) break;
+  }
+  return out;
+}
+
+/* ---------------- PubMed ---------------- */
+function pubmedTerm(name, hint, fromYear){
+  const p = parseName(name);
+  const au = `("${p.last} ${p.initials}"[au] OR "${p.last}, ${p.first}"[fau])`;
+  let aff = "";
+  if(hint){
+    const extra = /brown/i.test(hint) ? ` OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Providence, RI"[ad]` : "";
+    aff = ` AND ("${hint}"[ad]${extra})`;
+  }
+  return `${au}${aff} AND ("${fromYear}/01/01"[dp] : "3000"[dp])`;
+}
+async function pubmedSearch(name, hint, fromYear, countOnly=false){
+  const term = pubmedTerm(name,hint,fromYear);
+  const s = await ncbi("esearch",{term, retmax: countOnly?"0":"1000", sort:"pub_date"});
+  const ids = s.esearchresult?.idlist||[], count = +s.esearchresult?.count||0;
+  if(countOnly) return {count, term, items:[]};
+  const items=[];
+  for(let i=0;i<ids.length;i+=200){
+    const sm = await ncbi("esummary",{id:ids.slice(i,i+200).join(",")});
+    (sm.result?.uids||[]).forEach(u=>items.push(sm.result[u]));
+  }
+  return {count, term, items};
+}
+
+/* ---------------- Merge into one paper list ---------------- */
+const EXCLUDE_TYPES = new Set(["erratum","paratext","retraction","peer-review","editorial-erratum"]);
+const normTitle = t=>strip(String(t||"")).toLowerCase().replace(/<[^>]+>/g,"").replace(/[^a-z0-9]+/g," ").trim().slice(0,90);
+function buildPapers(works, pmItems, authorIds, name, hint, strict){
+  const idset = new Set(authorIds.map(shortId));
+  const p = parseName(name);
+  const papers=[], byDoi=new Map(), byPmid=new Map(), byTitle=new Map();
+  let droppedStrict=0;
+  for(const w of works){
+    if(EXCLUDE_TYPES.has(w.type)) continue;
+    const mine = (w.authorships||[]).find(a=>idset.has(shortId(a.author?.id)));
+    if(strict && hint){
+      const affText = mine ? [...(mine.institutions||[]).map(i=>i.display_name),...(mine.raw_affiliation_strings||[])].join(" | ") : "";
+      if(!instMatches(affText,hint)){ droppedStrict++; continue; }
+    }
+    const doi = w.doi ? w.doi.replace("https://doi.org/","").toLowerCase() : null;
+    const pmid = w.ids?.pmid ? String(w.ids.pmid).replace(/\D/g,"") : null;
+    const t = normTitle(w.display_name);
+    // collapse preprint + published duplicates by title
+    if(t && byTitle.has(t)){ const ex=byTitle.get(t); ex.cites=Math.max(ex.cites||0,w.cited_by_count||0); if(pmid&&!ex.pmid){ex.pmid=pmid;byPmid.set(pmid,ex);} continue; }
+    const paper = {
+      title: (w.display_name||"Untitled").replace(/<[^>]+>/g,""),
+      year: w.publication_year, date: w.publication_date,
+      venue: w.primary_location?.source?.display_name || (w.type==="preprint"?"Preprint":"—"),
+      doi, pmid, cites: w.cited_by_count||0, type:w.type,
+      role: mine?.author_position || "middle",
+      nAuthors: (w.authorships||[]).length,
+      coauthors: (w.authorships||[]).filter(a=>!idset.has(shortId(a.author?.id))).map(a=>({name:a.author?.display_name, key:keyFromDisplay(a.author?.display_name||""), inst:(a.institutions||[]).map(i=>i.display_name).join("; ")})),
+      topic: w.topics?.[0]?.display_name || null,
+      field: w.topics?.[0]?.field?.display_name || null,
+      oa: !!w.open_access?.is_oa, src:["OpenAlex"]
+    };
+    papers.push(paper); if(doi) byDoi.set(doi,paper); if(pmid) byPmid.set(pmid,paper); if(t) byTitle.set(t,paper);
+  }
+  let pmOnly=0;
+  for(const it of pmItems){
+    const pmid = String(it.uid);
+    const doi = (it.articleids||[]).find(a=>a.idtype==="doi")?.value?.toLowerCase();
+    const ex = byPmid.get(pmid) || (doi && byDoi.get(doi)) || byTitle.get(normTitle(it.title));
+    if(ex){ if(!ex.src.includes("PubMed")) ex.src.push("PubMed"); if(!ex.pmid) ex.pmid=pmid; continue; }
+    if(strict && works.length) continue; // strict mode trusts OpenAlex affiliations only
+    const authors = (it.authors||[]).filter(a=>a.authtype==="Author").map(a=>a.name);
+    const meKey = (p.last+" "+p.first[0]).toLowerCase();
+    const idx = authors.findIndex(a=>keyFromPubmed(a)===meKey);
+    const role = idx===0 ? "first" : (idx===authors.length-1 && idx>0) ? "last" : "middle";
+    const year = parseInt((it.sortpubdate||it.pubdate||"").slice(0,4));
+    papers.push({
+      title: String(it.title||"Untitled").replace(/<[^>]+>/g,"").replace(/\.$/,""),
+      year, date:(it.sortpubdate||"").slice(0,10).replace(/\//g,"-"),
+      venue: it.fulljournalname || it.source || "—", doi, pmid, cites:null, type:(it.pubtype||[]).join(", "),
+      role, nAuthors: authors.length,
+      coauthors: authors.filter((a,i)=>i!==idx).map(a=>({name:a,key:keyFromPubmed(a),inst:""})),
+      topic:null, field:null, oa:null, src:["PubMed"]
+    });
+    pmOnly++;
+  }
+  papers.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  return {papers, pmOnly, droppedStrict};
+}
+
+/* ---------------- Analysis ---------------- */
+function analyze(papers, fromYear, toYear){
+  const years=[]; for(let y=fromYear;y<=toYear;y++) years.push(y);
+  const perYear = years.map(y=>({year:y, first:0, middle:0, last:0}));
+  papers.forEach(p=>{ const r=perYear.find(x=>x.year===p.year); if(r) r[p.role]++; });
+  const n = papers.length;
+  const role = {first:0,middle:0,last:0}; papers.forEach(p=>role[p.role]++);
+  const withCites = papers.filter(p=>p.cites!=null);
+  const cites = withCites.reduce((s,p)=>s+p.cites,0);
+  const oaKnown = papers.filter(p=>p.oa!=null), oaShare = oaKnown.length ? oaKnown.filter(p=>p.oa).length/oaKnown.length : null;
+  const count = (arr)=>{const m=new Map(); arr.forEach(k=>{ if(k) m.set(k,(m.get(k)||0)+1)}); return [...m.entries()].sort((a,b)=>b[1]-a[1]);};
+  const venues = count(papers.map(p=>p.venue).filter(v=>v&&v!=="—"));
+  // topics with trend: share in last 2 years vs earlier
+  const recentCut = toYear-1;
+  const tp = papers.filter(p=>p.topic);
+  const recentN = tp.filter(p=>p.year>=recentCut).length, earlyN = tp.filter(p=>p.year<recentCut).length;
+  const topics = count(tp.map(p=>p.topic)).map(([t,c])=>{
+    const r = tp.filter(p=>p.topic===t && p.year>=recentCut).length, e=c-r;
+    const rs = recentN? r/recentN : 0, es = earlyN? e/earlyN : 0;
+    const trend = (recentN>=4 && earlyN>=4) ? (rs-es>0.06 && r>=2 ? "up" : es-rs>0.06 && e>=2 ? "down" : "") : "";
+    return {t,c,trend};
+  });
+  const fields = count(tp.map(p=>p.field));
+  // coauthors
+  const ca = new Map();
+  papers.forEach(p=>{ const seen=new Set(); p.coauthors.forEach(c=>{ if(!c.key||c.key.length<3||seen.has(c.key)) return; seen.add(c.key);
+    const e = ca.get(c.key)||{name:c.name,n:0,inst:c.inst}; e.n++; if(c.name && c.name.includes(" ") && /[a-z]/.test(c.name) && c.name.length>e.name.length) e.name=c.name; if(c.inst && !e.inst) e.inst=c.inst; ca.set(c.key,e); }); });
+  const coauthors = [...ca.values()].sort((a,b)=>b.n-a.n);
+  const topCited = [...withCites].sort((a,b)=>b.cites-a.cites).slice(0,6);
+  const medianTeam = (()=>{const s=papers.map(p=>p.nAuthors).filter(Boolean).sort((a,b)=>a-b); return s.length? s[Math.floor(s.length/2)] : null;})();
+  const fullYears = years.filter(y=>y<toYear);
+  const perYearAvg = n / (years.length - 1 + (new Date().getMonth()+1)/12);
+  return {years, perYear, n, role, cites, citesKnown:withCites.length, oaShare, venues, topics, fields, coauthors, topCited, medianTeam, perYearAvg, fullYears};
+}
+
+/* ---------------- Charts (SVG) ---------------- */
+function niceMax(v){ if(v<=5) return 5; const p=Math.pow(10,Math.floor(Math.log10(v))); for(const m of [1,2,2.5,5,10]) if(m*p>=v) return m*p; return v; }
+function barChart(el, rows, keys, colors, labels){
+  const W=520,H=230,pl=34,pr=8,pt=10,pb=26, iw=W-pl-pr, ih=H-pt-pb;
+  const max = niceMax(Math.max(1,...rows.map(r=>keys.reduce((s,k)=>s+r[k],0))));
+  const bw = Math.min(46, iw/rows.length*0.62), step = iw/rows.length;
+  let s = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Papers per year">`;
+  for(let i=0;i<=4;i++){ const v=max*i/4, y=pt+ih-ih*i/4; s+=`<line x1="${pl}" x2="${W-pr}" y1="${y}" y2="${y}" stroke="var(--border)" stroke-width="1"/><text x="${pl-6}" y="${y+4}" font-size="11" text-anchor="end">${Math.round(v)}</text>`; }
+  rows.forEach((r,i)=>{
+    const x = pl+step*i+(step-bw)/2; let y = pt+ih; const tot = keys.reduce((s,k)=>s+r[k],0);
+    const segs = keys.filter(k=>r[k]>0);
+    segs.forEach((k,j)=>{ const h = ih*r[k]/max; y-=h; const top = j===segs.length-1;
+      const gap = j>0 ? 2 : 0;
+      s+= top ? `<path d="M${x},${y+h-gap} V${y+4} Q${x},${y} ${x+4},${y} H${x+bw-4} Q${x+bw},${y} ${x+bw},${y+4} V${y+h-gap} Z" fill="${colors[keys.indexOf(k)]}"/>`
+              : `<rect x="${x}" y="${y}" width="${bw}" height="${Math.max(0,h-gap)}" fill="${colors[keys.indexOf(k)]}"/>`;
+    });
+    const tipHtml = `<b>${r.year}</b> · ${tot} papers<br>`+keys.map((k,j)=>`${labels[j]}: ${r[k]}`).join("<br>");
+    s+=`<rect x="${pl+step*i}" y="${pt}" width="${step}" height="${ih}" fill="transparent" data-tip="${esc(tipHtml)}"/>`;
+    s+=`<text x="${pl+step*i+step/2}" y="${H-8}" font-size="11" text-anchor="middle">${r.year}${r.year===new Date().getFullYear()?"*":""}</text>`;
+    if(tot) s+=`<text x="${x+bw/2}" y="${pt+ih-ih*tot/max-5}" font-size="11" text-anchor="middle" style="fill:var(--text)">${tot}</text>`;
+  });
+  s+=`</svg><div class="note">* ${new Date().getFullYear()} is a partial year</div>`;
+  el.innerHTML = s; wireTips(el);
+}
+function lineChart(el, pts){
+  if(!pts.length){ el.innerHTML='<div class="note">Citation history needs OpenAlex. Add a free API key in Data settings.</div>'; return; }
+  const W=520,H=230,pl=44,pr=12,pt=14,pb=26, iw=W-pl-pr, ih=H-pt-pb;
+  const max = niceMax(Math.max(1,...pts.map(p=>p.v)));
+  const X = i=> pl + (pts.length===1? iw/2 : iw*i/(pts.length-1)), Y = v=> pt+ih-ih*v/max;
+  let s = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Citations per year">`;
+  for(let i=0;i<=4;i++){ const v=max*i/4, y=Y(v); s+=`<line x1="${pl}" x2="${W-pr}" y1="${y}" y2="${y}" stroke="var(--border)"/><text x="${pl-6}" y="${y+4}" font-size="11" text-anchor="end">${v>=1000?(v/1000)+"k":Math.round(v)}</text>`; }
+  s+=`<path d="${pts.map((p,i)=>(i?"L":"M")+X(i)+","+Y(p.v)).join(" ")}" fill="none" stroke="var(--s1)" stroke-width="2" stroke-linejoin="round"/>`;
+  pts.forEach((p,i)=>{ s+=`<circle cx="${X(i)}" cy="${Y(p.v)}" r="4" fill="var(--s1)" stroke="var(--surface)" stroke-width="2"/>`;
+    s+=`<rect x="${X(i)-iw/pts.length/2}" y="${pt}" width="${iw/pts.length}" height="${ih}" fill="transparent" data-tip="${esc(`<b>${p.label}</b> · ${fmt(p.v)} citations`)}"/>`;
+    s+=`<text x="${X(i)}" y="${H-8}" font-size="11" text-anchor="middle">${p.label}${p.partial?"*":""}</text>`; });
+  const last = pts[pts.length-1]; s+=`<text x="${X(pts.length-1)}" y="${Y(last.v)-10}" font-size="11" text-anchor="end" style="fill:var(--text)">${fmt(last.v)}</text>`;
+  s+=`</svg>`;
+  el.innerHTML = s; wireTips(el);
+}
+function wireTips(el){ el.querySelectorAll("[data-tip]").forEach(n=>{ n.addEventListener("mouseenter",e=>showTip(e,n.dataset.tip)); n.addEventListener("mousemove",moveTip); n.addEventListener("mouseleave",hideTip); n.addEventListener("touchstart",e=>showTip(e.touches[0],n.dataset.tip),{passive:true}); }); }
+function hbars(el, items, emptyMsg){
+  if(!items.length){ el.innerHTML=`<div class="note">${emptyMsg}</div>`; return; }
+  const max = Math.max(...items.map(i=>i.c));
+  el.innerHTML = `<div class="hbar">${items.map(i=>`<div class="lab" title="${esc(i.t)}">${esc(i.t)} ${i.extra||""}</div><div class="num">${i.c}</div><div class="track"><div class="fill" style="width:${(i.c/max*100).toFixed(1)}%"></div></div>`).join("")}</div>`;
+}
+
+/* ---------------- Main search ---------------- */
+let STATE = null;
+$("#searchForm").addEventListener("submit", e=>{ e.preventDefault(); runSearch(); });
+$("#rerunBtn").onclick = ()=>{ if(!STATE) return; STATE.cands.forEach((c,i)=>c.selected = $("#cand"+i)?.checked); runSearch(true); };
+
+async function runSearch(reuse=false){
+  const name = $("#nameInput").value.trim(); if(!name){ setStatus('<span class="warn">Type a professor\'s name first.</span>'); return; }
+  const hint = $("#instInput").value.trim();
+  const yrs = +$("#yearsSel").value, toYear = new Date().getFullYear(), fromYear = toYear - yrs + 1;
+  const strict = $("#strictAff").checked;
+  document.querySelectorAll(".chip").forEach(c=>c.classList.toggle("on", c.dataset.name===name));
+  $("#compare").classList.add("hidden");
+  setStatus(`Looking up ${esc(name)}…`, true);
+  let cands = reuse && STATE?.name===name ? STATE.cands : null, oaErr=null, works=[], pm={items:[],count:0,term:""};
+  try{
+    if(!cands){ setStatus(`Finding ${esc(name)} in OpenAlex…`, true); cands = await findAuthors(name, hint); }
+    const sel = cands.filter(c=>c.selected);
+    if(sel.length){ setStatus(`Fetching papers since ${fromYear}…`, true); works = await fetchWorks(sel.map(c=>shortId(c.id)), fromYear); }
+  }catch(e){ oaErr=e; cands = cands||[]; }
+  try{ setStatus(`Cross-checking PubMed…`, true); pm = await pubmedSearch(name, hint, fromYear); }
+  catch(e){ if(oaErr){ setStatus(`<span class="err">Couldn't reach OpenAlex or PubMed (${esc(e.message)}). If you opened this inside a chat preview, open it in a normal browser tab instead.</span>`); return; } }
+  const sel = cands.filter(c=>c.selected);
+  const {papers, pmOnly, droppedStrict} = buildPapers(works, pm.items, sel.map(c=>c.id), name, hint, strict);
+  if(!papers.length){
+    setStatus(`<span class="warn">No papers found for ${esc(name)} since ${fromYear}${hint?` with “${esc(hint)}”`:""}. Try the full name with middle initial, a different institution hint, or open the profile list below.</span>`);
+  }
+  const A = analyze(papers, fromYear, toYear);
+  STATE = {name, hint, fromYear, toYear, cands, papers, A, pm, oaErr, pmOnly, droppedStrict, strict};
+  render();
+  let msg = `Found ${papers.length} papers for ${esc(name)} from ${fromYear} to today.`;
+  if(oaErr) msg += ` <span class="warn">OpenAlex didn't answer (${esc(oaErr.status===401||oaErr.status===403||oaErr.status===409||oaErr.status===429?"add or check your free API key in Data settings":oaErr.message)}), so this uses PubMed only: no citation counts or themes.</span>`;
+  else if(!sel.length) msg += ` <span class="warn">No OpenAlex profile matched; showing PubMed results.</span>`;
+  setStatus(msg);
+}
+
+function render(){
+  const S = STATE, A = S.A, sel = S.cands.filter(c=>c.selected);
+  const roster = ROSTER_FLAT.find(p=>p.name.toLowerCase()===S.name.toLowerCase());
+  $("#results").classList.remove("hidden");
+  $("#pName").textContent = S.name;
+  const inst = sel[0]?.last_known_institutions?.map(i=>i.display_name).join(", ");
+  $("#pMeta").innerHTML = [roster?`${esc(roster.dept)} · ${esc(roster.focus)}`:"", inst?`OpenAlex lists: ${esc(inst)}`:"",
+    sel[0]?.orcid?`<a href="${esc(sel[0].orcid)}" target="_blank" rel="noopener">ORCID</a>`:""].filter(Boolean).join("<br>");
+  const gsQuery = encodeURIComponent(S.name.replace(/\([^)]*\)/g,"")+(S.hint?" "+S.hint.replace(/University/i,"").trim():""));
+  $("#pLinks").innerHTML = `<a class="btn small" href="https://scholar.google.com/citations?view_op=search_authors&mauthors=${gsQuery}" target="_blank" rel="noopener">Google Scholar profile ↗</a>`+
+    (sel[0]?`<a class="btn small" href="https://openalex.org/${shortId(sel[0].id)}" target="_blank" rel="noopener">OpenAlex ↗</a>`:"")+
+    (S.pm.term?`<a class="btn small" href="https://pubmed.ncbi.nlm.nih.gov/?term=${encodeURIComponent(S.pm.term)}&sort=date" target="_blank" rel="noopener">PubMed search ↗</a>`:"");
+  // candidates
+  $("#candSummary").textContent = S.cands.length ? `Author profiles matched: ${sel.length} of ${S.cands.length} selected — check these if the numbers look off` : "No OpenAlex author profiles (PubMed only)";
+  $("#candList").innerHTML = S.cands.slice(0,12).map((c,i)=>`<label class="cand"><input type="checkbox" id="cand${i}" ${c.selected?"checked":""}>
+    <span><b>${esc(c.display_name)}</b> · ${fmt(c.works_count)} works · ${fmt(c.cited_by_count)} citations · h-index ${c.summary_stats?.h_index??"–"}<br>
+    <span class="note">${esc(c.insts.slice(0,3).join("; ")||"no institution listed")}${c.topics?.[0]?` · ${esc(c.topics[0].display_name)}`:""}</span></span></label>`).join("");
+  $("#strictAff").checked = S.strict;
+
+  // KPIs
+  const h = sel.length ? Math.max(...sel.map(c=>c.summary_stats?.h_index||0)) : null;
+  const totalCites = sel.length ? sel.reduce((s,c)=>s+(c.cited_by_count||0),0) : null;
+  const pct = x=> A.n ? Math.round(x/A.n*100)+"%" : "–";
+  $("#kpis").innerHTML = [
+    ["Papers", fmt(A.n), `${S.fromYear}–${S.toYear} · ~${A.perYearAvg.toFixed(1)} per year`],
+    ["Senior-author papers", fmt(A.role.last), `${pct(A.role.last)} of papers, last author`],
+    ["First-author papers", fmt(A.role.first), pct(A.role.first)+" of papers"],
+    ["Citations to these papers", A.citesKnown?fmt(A.cites):"–", A.citesKnown?`${(A.cites/Math.max(1,A.citesKnown)).toFixed(1)} per paper so far`:"needs OpenAlex"],
+    ["Career h-index", h??"–", totalCites!=null?`${fmt(totalCites)} career citations (OpenAlex)`:"needs OpenAlex"],
+    ["Open access", A.oaShare!=null?Math.round(A.oaShare*100)+"%":"–", A.medianTeam?`median team: ${A.medianTeam} authors`:""]
+  ].map(([l,v,s])=>`<div class="kpi"><div class="l">${l}</div><div class="v">${v}</div><div class="s">${s}</div></div>`).join("");
+
+  // Summary bullets
+  const b=[];
+  if(A.n){
+    const full = A.perYear.filter(r=>r.year<S.toYear).map(r=>r.first+r.middle+r.last);
+    const half = Math.floor(full.length/2);
+    const early = full.slice(0,half).reduce((a,c)=>a+c,0)/Math.max(1,half), late = full.slice(-half).reduce((a,c)=>a+c,0)/Math.max(1,half);
+    const trend = half && early ? (late>early*1.25?"rising":late<early*0.75?"slowing":"steady") : null;
+    b.push(`<b>${A.n} papers</b> since ${S.fromYear}${trend?`, and output is <b>${trend}</b> (${early.toFixed(1)} → ${late.toFixed(1)} papers a year, comparing the earlier and later full years)`:""}.`);
+    const lastShare = A.role.last/A.n;
+    b.push(lastShare>=0.4 ? `Leads a lab: last (senior) author on <b>${Math.round(lastShare*100)}%</b> of papers, the usual sign of a PI running their own projects.`
+      : lastShare>=0.2 ? `Mixed role: senior author on ${Math.round(lastShare*100)}% of papers, collaborator on most of the rest.`
+      : `Mostly a collaborator: senior author on only ${Math.round(lastShare*100)}% of papers, often contributing to others' studies (common for clinicians, core-lab directors and early-career faculty).`);
+    if(A.topics.length){ const up=A.topics.filter(t=>t.trend==="up").slice(0,2).map(t=>t.t);
+      b.push(`Main themes: ${A.topics.slice(0,3).map(t=>`<b>${esc(t.t)}</b>`).join(", ")}${up.length?`. Growing lately: ${up.map(esc).join(", ")}`:""}.`); }
+    if(A.venues.length) b.push(`Publishes most in ${A.venues.slice(0,3).map(v=>`<i>${esc(v[0])}</i> (${v[1]})`).join(", ")}.`);
+    if(A.coauthors.length) b.push(`Closest collaborators: ${A.coauthors.slice(0,4).map(c=>`${esc(c.name)} (${c.n})`).join(", ")}.`);
+    if(A.topCited[0]) b.push(`Most-cited recent paper: “${esc(A.topCited[0].title)}” (${A.topCited[0].year}, ${fmt(A.topCited[0].cites)} citations).`);
+  }
+  const src = [`${S.papers.filter(p=>p.src.includes("OpenAlex")).length} from OpenAlex`, `${S.pm.count} PubMed hits for this name + affiliation`];
+  if(S.pmOnly) src.push(`${S.pmOnly} added from PubMed that OpenAlex missed`);
+  if(S.droppedStrict) src.push(`${S.droppedStrict} excluded by the strict-affiliation filter`);
+  b.push(`<span class="note">Sources: ${src.join(" · ")}.</span>`);
+  $("#summaryList").innerHTML = b.map(x=>`<li>${x}</li>`).join("");
+
+  // charts
+  barChart($("#chartYears"), A.perYear, ["last","first","middle"], ["var(--s1)","var(--s2)","var(--s3)"], ["Senior (last)","First","Middle"]);
+  const cby = {}; sel.forEach(c=>(c.counts_by_year||[]).forEach(r=>{ cby[r.year]=(cby[r.year]||0)+(r.cited_by_count||0); }));
+  const cy = Object.keys(cby).map(Number).filter(y=>y>=S.toYear-9).sort();
+  lineChart($("#chartCites"), cy.map(y=>({label:String(y), v:cby[y], partial:y===S.toYear})));
+
+  hbars($("#topics"), A.topics.slice(0,8).map(t=>({t:t.t,c:t.c,extra:t.trend==="up"?'<span class="tag up">rising</span>':t.trend==="down"?'<span class="tag down">fading</span>':""})), "Themes come from OpenAlex. Add a free API key in Data settings.");
+  hbars($("#venues"), A.venues.slice(0,8).map(([t,c])=>({t,c})), "No venues found.");
+  hbars($("#coauthors"), A.coauthors.slice(0,8).map(c=>({t:c.name,c:c.n,extra:c.inst?`<span class="note">· ${esc(c.inst.split(";")[0])}</span>`:""})), "No co-authors found.");
+  $("#topCited").innerHTML = A.topCited.length ? A.topCited.map(p=>`<div style="margin-bottom:10px"><div class="ptitle">${esc(p.title)}</div><div class="pmeta">${p.year} · ${esc(p.venue)} · <b>${fmt(p.cites)}</b> citations · ${roleLabel(p.role)} · ${scholarLink(p)}</div></div>`).join("") : '<div class="note">Citation counts need OpenAlex. Add a free API key in Data settings.</div>';
+
+  // table
+  $("#fYear").innerHTML = '<option value="">All years</option>'+A.years.slice().reverse().map(y=>`<option>${y}</option>`).join("");
+  $("#fText").value=""; $("#fRole").value="";
+  sortKey="date"; sortDir=-1; renderTable();
+  $("#results").scrollIntoView({behavior:"smooth", block:"start"});
+}
+const roleLabel = r=>({first:"First author",last:"Senior author",middle:"Middle author"}[r]);
+const scholarLink = p=>`<a href="https://scholar.google.com/scholar?q=${encodeURIComponent('"'+p.title+'"')}" target="_blank" rel="noopener">Scholar</a>`;
+
+let sortKey="date", sortDir=-1, shown=25;
+$("#moreBtn").onclick=()=>{shown+=50;renderTable(true);};
+document.querySelectorAll("#pubTable th[data-k]").forEach(th=>th.onclick=()=>{ const k=th.dataset.k==="year"?"date":th.dataset.k; sortDir = sortKey===k ? -sortDir : (k==="title"||k==="role"?1:-1); sortKey=k; renderTable(); });
+["#fText","#fYear","#fRole"].forEach(s=>$(s).addEventListener("input",()=>renderTable()));
+function filtered(){
+  const q=$("#fText").value.toLowerCase(), y=$("#fYear").value, r=$("#fRole").value;
+  return STATE.papers.filter(p=>(!y||String(p.year)===y)&&(!r||p.role===r)&&(!q||(p.title+" "+p.venue+" "+p.coauthors.map(c=>c.name).join(" ")).toLowerCase().includes(q)))
+    .sort((a,b)=>{ const va=a[sortKey]??-1, vb=b[sortKey]??-1; return (va>vb?1:va<vb?-1:0)*sortDir; });
+}
+function renderTable(keep){
+  if(!STATE) return; if(keep!==true) shown=25; const all = filtered(), rows = all.slice(0,shown);
+  $("#pubTable tbody").innerHTML = rows.map(p=>`<tr>
+    <td><div class="ptitle">${esc(p.title)}</div><div class="pmeta">${esc(p.venue)}${p.type&&p.type!=="article"?` · ${esc(p.type.split(",")[0])}`:""} · ${p.nAuthors} authors${p.oa?' · <span class="tag">open access</span>':""}</div></td>
+    <td class="n">${p.year||""}</td><td class="col-hide">${roleLabel(p.role)}</td><td class="n">${p.cites==null?"–":fmt(p.cites)}</td>
+    <td class="col-hide" style="white-space:nowrap">${scholarLink(p)}${p.doi?` · <a href="https://doi.org/${esc(p.doi)}" target="_blank" rel="noopener">DOI</a>`:""}${p.pmid?` · <a href="https://pubmed.ncbi.nlm.nih.gov/${p.pmid}/" target="_blank" rel="noopener">PubMed</a>`:""}</td></tr>`).join("");
+  $("#tableNote").textContent = `${rows.length} of ${all.length} papers shown${all.length<STATE.papers.length?` (filtered from ${STATE.papers.length})`:""}.`;
+  $("#moreBtn").classList.toggle("hidden", all.length<=shown);
+}
+function csv(){
+  const head=["Title","Year","Date","Journal","Role","Authors","Citations","DOI","PMID","Main topic","Sources"];
+  const q=v=>`"${String(v??"").replace(/"/g,'""')}"`;
+  return [head.join(","), ...filtered().map(p=>[p.title,p.year,p.date,p.venue,roleLabel(p.role),p.nAuthors,p.cites??"",p.doi??"",p.pmid??"",p.topic??"",p.src.join("+")].map(q).join(","))].join("\n");
+}
+$("#copyCsv").onclick = async ()=>{ try{ await navigator.clipboard.writeText(csv()); setStatus("CSV copied to clipboard."); }catch(e){ setStatus('<span class="warn">Clipboard blocked here; use Download CSV.</span>'); } };
+$("#dlCsv").onclick = ()=>{ const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([csv()],{type:"text/csv"})); a.download=(STATE.name.replace(/\W+/g,"_"))+"_publications.csv"; document.body.appendChild(a); a.click(); a.remove(); };
+
+/* ---------------- Compare everyone ---------------- */
+let CMP=[], cmpKey="papers", cmpDir=-1;
+$("#compareBtn").onclick = async ()=>{
+  const hint = $("#instInput").value.trim(), yrs=+$("#yearsSel").value, toYear=new Date().getFullYear(), fromYear=toYear-yrs+1;
+  $("#results").classList.add("hidden"); $("#compare").classList.remove("hidden");
+  $("#compareSub").textContent = `${fromYear} to today · institution hint “${hint}”`;
+  CMP = [];
+  for(const [i,p] of ROSTER_FLAT.entries()){
+    setStatus(`Analyzing ${i+1} of ${ROSTER_FLAT.length}: ${esc(p.name)}…`, true);
+    let row = {name:p.name, papers:null, senior:null, perYear:null, cites:null, h:null, topic:"", err:""};
+    try{
+      let works=[], cands=[], pmItems=[];
+      try{ cands = await findAuthors(p.name, hint); const sel=cands.filter(c=>c.selected); if(sel.length) works = await fetchWorks(sel.map(c=>shortId(c.id)), fromYear); row.h = sel.length?Math.max(...sel.map(c=>c.summary_stats?.h_index||0)):null; }
+      catch(e){ row.err="OpenAlex unavailable"; }
+      try{ pmItems = (await pubmedSearch(p.name, hint, fromYear)).items; }catch(e){}
+      const {papers} = buildPapers(works, pmItems, cands.filter(c=>c.selected).map(c=>c.id), p.name, hint, false);
+      const A = analyze(papers, fromYear, toYear);
+      Object.assign(row,{papers:A.n, senior:A.role.last, perYear:+A.perYearAvg.toFixed(1), cites:A.citesKnown?A.cites:null, topic:A.topics[0]?.t||A.venues[0]?.[0]||""});
+    }catch(e){ row.err = e.message; }
+    CMP.push(row); renderCmp();
+  }
+  setStatus(`Compared ${ROSTER_FLAT.length} professors. Tap a column header to sort.`);
+};
+document.querySelectorAll("#cmpTable th[data-k]").forEach(th=>th.onclick=()=>{ const k=th.dataset.k; cmpDir = cmpKey===k?-cmpDir:(k==="name"||k==="topic"?1:-1); cmpKey=k; renderCmp(); });
+function renderCmp(){
+  const rows=[...CMP].sort((a,b)=>{ const va=a[cmpKey]??-1, vb=b[cmpKey]??-1; return (va>vb?1:va<vb?-1:0)*cmpDir; });
+  const maxP = Math.max(1,...CMP.map(r=>r.papers||0));
+  $("#cmpTable tbody").innerHTML = rows.map(r=>`<tr>
+    <td><a href="#" data-n="${esc(r.name)}">${esc(r.name)}</a>${r.err?`<div class="pmeta">${esc(r.err)}</div>`:""}</td>
+    <td class="n"><div style="display:flex;align-items:center;gap:6px;justify-content:flex-end"><span style="display:inline-block;height:6px;border-radius:3px;background:var(--s1);width:${Math.round((r.papers||0)/maxP*60)}px"></span>${fmt(r.papers)}</div></td>
+    <td class="n">${fmt(r.senior)}</td><td class="n">${r.perYear??"–"}</td><td class="n">${fmt(r.cites)}</td><td class="n col-hide">${r.h??"–"}</td><td class="col-hide">${esc(r.topic)}</td></tr>`).join("");
+  $("#cmpTable").querySelectorAll("a[data-n]").forEach(a=>a.onclick=e=>{ e.preventDefault(); $("#nameInput").value=a.dataset.n; runSearch(); });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+# Live audit — 2026-11-01T17:26:44.343Z
+- CORS OpenAlex: HTTP 200, allow-origin=*, allow-headers=Accept, Accept-Language, Accept-Encoding, Authorization, Content-Type, X-OpenAlex-UI, X-Impersonate-User
+- CORS NCBI esearch: HTTP 200, allow-origin=*, allow-headers=null
+- CORS NCBI efetch: HTTP 200, allow-origin=*, allow-headers=null
+- CORS S2 batch preflight: HTTP 204, allow-origin=*, allow-headers=content-type,x-api-key,authorization,x-amz-security-token,x-amz-date
+Window 2022–2026, hint "Brown University", OpenAlex key: NO
+
+## Qian Chen
+- OpenAlex candidates (35):
+  - [x] (recent) Qian Chen — 170 works, 1690 cites, h=21 — Capital Medical University; Beijing Friendship Hospital; Philadelphia College of Osteopath — topic: Functional Brain Connectivity Studies
+  - [x] (recent) Qian Chen — 53 works, 724 cites, h=15 — Children's Hospital of Chongqing Medical University; Jiangsu University; Xuzhou Medical Co — topic: Osteoarthritis Treatment and Mechanisms
+  - [x] (recent) Qian Chen — 31 works, 647 cites, h=13 — Xizang Minzu University; University of Wisconsin–Madison; State Grid Corporation of China  — topic: Liver Disease Diagnosis and Treatment
+  - [x] (recent) Qian Chen — 28 works, 138 cites, h=7 — Hunan Normal University; Shanxi Medical University; The Affiliated Yongchuan Hospital of C — topic: Acute Myocardial Infarction Research
+  - [x] (recent) Qian Chen — 12 works, 99 cites, h=5 — Wannan Medical College; Shanghai Jiao Tong University; Anqing City Hospital — topic: Lysosomal Storage Disorders Research
+  - [x] (recent) Qian Chen — 3 works, 13 cites, h=2 — Dalian University of Technology; Brown University; State Key Laboratory of Fine Chemicals — topic: Catalytic Processes in Materials Science
+  - [ ] (ever) Qian Chen — 1469 works, 29205 cites, h=77 — East China University of Science and Technology; University of Illinois Urbana-Champaign;  — topic: Digital Holography and Microscopy
+  - [ ] (ever) Qian Chen — 524 works, 5382 cites, h=40 — University of Southern California; Houston Methodist; Guilin Medical University — topic: Aquatic Ecosystems and Phytoplankton Dynamics
+- PubMed: 12 hits · term: `"Chen, Qian"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
+- RESULT: 12 papers (OpenAlex raw 155, hidden-elsewhere 142, hidden-unverified 3, PubMed-only added 5, PubMed rejected 1, S2 citations ok=true)
+- Profile purity: A5026302891=22%, A5070487819=0%, A5100737732=10%, A5125282330=33%, A5111166011=14%, A5101910142=0%
+- Roles: last 9 / first 0 / middle 3 · cites 67 · per year 2.4
+- Per year: 2022:2 2023:3 2024:1 2025:3 2026:3
+- Topics: Osteoarthritis Treatment and Mechanisms (3); Cellular Mechanics and Interactions (1); Nerve injury and regeneration (1); Medicinal Plant Pharmacodynamics Research (1); Telomeres, Telomerase, and Senescence (1)
+- Venues: Pharmaceuticals (2); Osteoarthritis and Cartilage (2); Osteoarthritis and cartilage open (1); International journal of surgery case reports (1); The Innovation (1)
+- Coauthors: Yajun Liu (5); Jing Ding (4); Neill Y. Li (3); Brandon Vorrius (3); Jonathan Ge (3); Zhen Qiao (3)
+- Duplicate titles left: 0
+- Author affiliation on raw works: Capital Medical University: 59; Children's Hospital of Chongqing Medical University: 7; MATCH: 7; Xi'an Jiaotong University: 7; Fujian Medical University: 5; (none listed): 5; Philadelphia College of Osteopathic Medicine: 4; Second Military Medical University: 3
+- Sample hidden papers:
+  - 2026 · Growth trajectories in exclusively breastfed infants with clinically diagnosed f · [Children's Hospital of Chongqing Medical University | Chongqing Key Laboratory o]
+  - 2026 · State-specific dynamic functional connectivity disturbances in spinal cord injur · [Capital Medical University | Beijing Friendship Hospital | Department of Radiolo]
+  - 2026 · Brain iron deposition mediates cognitive impairment in COPD: A possible imaging  · [Capital Medical University | Capital Medical University]
+  - 2026 · Fisetin targets multiple signaling pathways to suppress microglia-mediated neuro · [Xizang Minzu University | The Key Laboratory for High Altitude Brain Injury and ]
+  - 2026 · Spatiotemporal fringe pattern analysis using physics-informed deep learning · [Jiangsu Key Laboratory of Visual Sensing & Intelligent Perception | State Key La]
+  - 2026 · C2H4 Synthesis Through Catalytic C2H2 Hydrogenation in post-CH4 Plasma Streams:  · [Dalian University of Technology | State Key Laboratory of Fine Chemicals | State]
+- Sample PubMed-only papers:
+  - 2026 · The common and specific osteoarthritis gait characteristics: A quantitative grading system · Osteoarthritis and cartilage open · role last
+  - 2026 · Emergency management of severe polytrauma with traumatic diaphragmatic hernia via EMSS: ca · International journal of surgery case re · role middle
+  - 2025 · Aberrant expression of collagen type X in solid tumor stroma is associated with EMT, immun · BMC cancer · role middle
+  - 2023 · Editorial: Immunometabolism in autoimmune and autoinflammatory disorders · Frontiers in immunology · role last
+  - 2023 · Matrilin-2 within a three-dimensional lysine-modified chitosan porous scaffold enhances Sc · Frontiers in bioengineering and biotechn · role last
+- Most recent kept:
+  - 2026 · The common and specific osteoarthritis gait characteristics: A quantitative grading system · Osteoarthritis and cartilage open · last · cites 0 · PubMed
+  - 2026 · Emergency management of severe polytrauma with traumatic diaphragmatic hernia via EMSS: ca · International journal of surgery case re · middle · cites 0 · PubMed
+  - 2026 · Transformative biomechanics and mechanobiology breakthroughs shaping the future of health  · The Innovation · middle · cites 8 · OpenAlex+PubMed
+  - 2025 · Matrilin-2 with a K-Chitosan Scaffold Enhances Functional Recovery and Nerve Regeneration  · Pharmaceuticals · last · cites 3 · OpenAlex+PubMed
+  - 2025 · COMMON OA GAIT: A QUANTITATIVE, EASY-TO-USE GRADING SYSTEM FOR OSTEOARTHRITIS ASSOCIATED G · Osteoarthritis and Cartilage · last · cites 0 · OpenAlex
+
+## Eric Darling
+- OpenAlex candidates (2):
+  - [x] (recent) Eric M. Darling — 106 works, 5632 cites, h=29 — Brown University; Duke University; Rhode Island Hospital — topic: Cellular Mechanics and Interactions
+  - [ ]  Eric John Darling — 6 works, 66 cites, h=2 — University of Southern Queensland — topic: Construction Project Management and Performance
+- PubMed: 0 hits · term: `"Darling, Eric"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
+- RESULT: 10 papers (OpenAlex raw 11, hidden-elsewhere 0, hidden-unverified 0, PubMed-only added 0, PubMed rejected 0)
+- Profile purity: A5053646968=100%
+- Roles: last 4 / first 0 / middle 6 · cites 47 · per year 2.0
+- Per year: 2022:6 2023:1 2024:1 2025:1 2026:1
+- Topics: Microfluidic and Bio-sensing Technologies (4); Cellular Mechanics and Interactions (3); Mesenchymal stem cell research (1); Osteoarthritis Treatment and Mechanisms (1); Adsorption and biosorption for pollutant removal (1)
+- Venues: Lab on a Chip (1); Stem Cell Reviews and Reports (1); Tissue Engineering Part A (1); Microsystems & Nanoengineering (1); Cellular and Molecular Bioengineering (1)
+- Coauthors: Ryan Dubay (3); Jason O. Fiering (3); Graylen R. Chickering (2); Vera C. Fonseca (2); Clara E. Tandar (2); Leroy Jia (1)
+- Duplicate titles left: 0
+- Author affiliation on raw works: MATCH: 9; (none listed): 2
+- Most recent kept:
+  - 2026 · Estimating single-cell elastic modulus in a serial microfluidic cytometer from time-of-fli · Lab on a Chip · middle · cites 0 · OpenAlex
+  - 2025 · Identifying Immunomodulatory Subpopulations of Adipose Stromal Vascular Fraction and Stem/ · Stem Cell Reviews and Reports · last · cites 4 · OpenAlex
+  - 2024 · Selection of Force Sensors for In Situ Measurement of Neotissue Microenvironments · Tissue Engineering Part A · last · cites 2 · OpenAlex
+  - 2023 · Microparticles with tunable, cell-like properties for quantitative acoustic mechanophenoty · Microsystems & Nanoengineering · middle · cites 7 · OpenAlex
+  - 2022 · Chondrogenesis of Adipose-Derived Stem Cells Using an Arrayed Spheroid Format · Cellular and Molecular Bioengineering · last · cites 4 · OpenAlex
+
+## Joseph J. Crisco
+- OpenAlex candidates (1):
+  - [x] (recent) Joseph John Crisco — 346 works, 16803 cites, h=68 — Brown University; Rhode Island Hospital; Rutgers, The State University of New Jersey — topic: Orthopedic Surgery and Rehabilitation
+- PubMed: 28 hits · term: `("Crisco, Joseph"[fau] OR "Crisco, Joseph J"[fau]) AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
+- RESULT: 32 papers (OpenAlex raw 30, hidden-elsewhere 0, hidden-unverified 0, PubMed-only added 3, PubMed rejected 0, S2 citations ok=true)
+- Profile purity: A5019062338=100%
+- Roles: last 15 / first 5 / middle 12 · cites 115 · per year 6.5
+- Per year: 2022:7 2023:3 2024:8 2025:9 2026:5
+- Topics: Orthopedic Surgery and Rehabilitation (16); Orthopaedic implants and arthroplasty (4); Medical Image Segmentation Techniques (3); Traumatic Brain Injury Research (2); Osteoarthritis Treatment and Mechanisms (1)
+- Venues: Journal of Biomechanics (7); Journal of Orthopaedic Research® (3); The Journal Of Hand Surgery (2); SSRN Electronic Journal (2); Hand (New York, N.Y.) (2)
+- Coauthors: Amy M. Morton (15); Douglas C. Moore (14); Amy L. Ladd (10); Janine D. Bacic (9); Arnold‐Peter C. Weiss (9); Rohit Badida (6)
+- Duplicate titles left: 0
+- Author affiliation on raw works: MATCH: 29; (none listed): 1
+- Sample PubMed-only papers:
+  - 2022 · An Anatomical Evaluation of the Trapezium and Its Relationship to Basilar Joint Osteophyti · Hand (New York, N.Y.) · role middle
+  - 2022 · "Stress taper" fixation increases torsional failure strength in a cadaveric femur model · Clinical biomechanics (Bristol, Avon) · role middle
+  - 2022 · The Association of AUSCAN and PRWHE Patient-reported Outcome Measures With Radiographic Pr · Hand (New York, N.Y.) · role last
+- Most recent kept:
+  - 2026 · Shape predicts osteoarthritis progression in the first carpometacarpal joint · Frontiers in Bioengineering and Biotechn · middle · cites 0 · OpenAlex+PubMed
+  - 2026 · Kinematic tracking of the small bones of the wrist in sequential 3DCT and dynamic 4DCT vol · BioMedical Engineering OnLine · first · cites 0 · OpenAlex+PubMed
+  - 2026 · Small bone replacement leads to greater gait asymmetry, cartilage damage, and osteophyte f · Osteoarthritis and Cartilage Open · last · cites 0 · OpenAlex+PubMed
+  - 2026 · Field performance of non-wood collegiate baseball bats · Proceedings of the Institution of Mechan · first · cites 0 · OpenAlex
+  - 2026 · Less is more: downsampling x-ray images improves pose estimation accuracy · Medical Engineering & Physics · middle · cites 1 · OpenAlex+PubMed
+
+## Brett D. Owens
+- OpenAlex candidates (2):
+  - [x] (recent) Brett D. Owens — 540 works, 20882 cites, h=74 — Washington University in St. Louis; Brown University; Rhode Island Hospital — topic: Shoulder Injury and Treatment
+  - [ ]  B. Owens — 11 works, 19 cites, h=2 — Virginia Mason Medical Center; University of Washington; Northern General Hospital — topic: Anesthesia and Pain Management
+- PubMed: 99 hits · term: `("Owens, Brett"[fau] OR "Owens, Brett D"[fau]) AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
+- RESULT: 132 papers (OpenAlex raw 127, hidden-elsewhere 5, hidden-unverified 0, PubMed-only added 10, PubMed rejected 0, S2 citations ok=false)
+- Profile purity: A5006184906=96%
+- Roles: last 65 / first 8 / middle 59 · cites 802 · per year 26.8
+- Per year: 2022:28 2023:30 2024:40 2025:20 2026:14
+- Topics: Shoulder Injury and Treatment (43); Knee injuries and reconstruction techniques (23); Sports injuries and prevention (14); Osteoarthritis Treatment and Mechanisms (9); Lower Extremity Biomechanics and Pathologies (5)
+- Venues: Orthopaedic Journal of Sports Medicine (24); The American Journal of Sports Medicine (22); Arthroscopy Sports Medicine and Rehabilitation (8); Rhode Island medical journal (2013) (8); Sports Health A Multidisciplinary Approach (6)
+- Coauthors: Edward J. Testa (30); Matthew S. Quinn (21); Rory A. Byrne (21); James Alex Albright (20); Stephen E. Marcaccio (16); Nicholas J. Lemme (16)
+- Duplicate titles left: 0
+- Author affiliation on raw works: MATCH: 107; (none listed): 15; U.S. Army Research Institute of Environmental Medicine: 2; University Orthopedics Inc, Riverside, RI, United States: 1; Slocum Research and Education Foundation: 1; BEAR-MOON Design Group: All authors are listed in the Author: 1
+- Sample hidden papers:
+  - 2025 · TESTOSTERONE THERAPY IS ASSOCIATED WITH INCREASED RATES OF ROTATOR CUFF TEARS, R · [University Orthopedics Inc, Riverside, RI, United States]
+  - 2025 · Military Health and Nutrition Examination Study (MHANES): Assessment of Dietary  · [U.S. Army Research Institute of Environmental Medicine | US Army Research Instit]
+  - 2024 · The Military Health and Nutrition Examination Study (MHANES) Project Overview: A · [U.S. Army Research Institute of Environmental Medicine | United States Army | Un]
+  - 2022 · Returning to Activity After Anterior Cruciate Ligament Revision Surgery: An Anal · [Slocum Research and Education Foundation | Investigation performed at Slocum Res]
+  - 2022 · Design Features and Rationale of the BEAR-MOON (Bridge-Enhanced ACL Restoration  · [BEAR-MOON Design Group: All authors are listed in the Authors section at the end]
+- Sample PubMed-only papers:
+  - 2026 · Evaluation, Management, and Return-To-Sport Guidelines for Cervical Spine Injuries in Athl · Global spine journal · role middle
+  - 2024 · Structure and Function Are Not the Same: The Case for Restoring Mechanoreceptor Continuity · Rhode Island medical journal (2013) · role middle
+  - 2024 · High Case Volume Predicts Greater Odds of Autograft Use and Meniscal Repair for Anterior C · Arthroscopy : the journal of arthroscopi · role last
+  - 2023 · Tunnel Management in Revision Anterior Cruciate Ligament Reconstruction: Current Concepts · The American journal of sports medicine · role middle
+  - 2022 · Epidemiology of rugby-related fractures in high school- and college-aged players in the Un · The Physician and sportsmedicine · role last
+- Most recent kept:
+  - 2026 · Evaluation, Management, and Return-To-Sport Guidelines for Cervical Spine Injuries in Athl · Global spine journal · middle · cites - · PubMed
+  - 2026 · From Degeneration to Regeneration: The Evolving Landscape of Cell-Based Tendon Repair · Cells · middle · cites 0 · OpenAlex+PubMed
+  - 2026 · The Rise of Remplissage · The American Journal of Sports Medicine · first · cites 0 · OpenAlex
+  - 2026 · Poster 211. Development and Validation of The BRACE (Bankart Risk Assessment & Clinical Es · Orthopaedic Journal of Sports Medicine · middle · cites 0 · OpenAlex
+  - 2026 · Most Upper Extremity Injuries in Elite Summer League Baseball Players Occur From Overuse,  · Arthroscopy Sports Medicine and Rehabili · last · cites 0 · OpenAlex+PubMed
+

@@ -1,9 +1,9 @@
-# Live audit — 2026-11-01T17:28:43.850Z
+# Live audit — 2026-11-01T19:37:45.913Z
 - CORS OpenAlex: HTTP 200, allow-origin=*, allow-headers=Accept, Accept-Language, Accept-Encoding, Authorization, Content-Type, X-OpenAlex-UI, X-Impersonate-User
 - CORS NCBI esearch: HTTP 200, allow-origin=*, allow-headers=null
 - CORS NCBI efetch: HTTP 200, allow-origin=*, allow-headers=null
 - CORS S2 batch preflight: HTTP 204, allow-origin=*, allow-headers=content-type,x-api-key,authorization,x-amz-security-token,x-amz-date
-Window 2022–2026, hint "Brown University", OpenAlex key: NO
+Window 2022–2026, hint "Brown University", OpenAlex key: built-in
 
 ## Chathuraka Jayasuriya
 - OpenAlex candidates (1):

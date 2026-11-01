@@ -1,9 +1,9 @@
-# Live audit — 2026-11-01T17:28:44.618Z
+# Live audit — 2026-11-01T19:37:43.617Z
 - CORS OpenAlex: HTTP 200, allow-origin=*, allow-headers=Accept, Accept-Language, Accept-Encoding, Authorization, Content-Type, X-OpenAlex-UI, X-Impersonate-User
 - CORS NCBI esearch: HTTP 200, allow-origin=*, allow-headers=null
 - CORS NCBI efetch: HTTP 200, allow-origin=*, allow-headers=null
 - CORS S2 batch preflight: HTTP 204, allow-origin=*, allow-headers=content-type,x-api-key,authorization,x-amz-security-token,x-amz-date
-Window 2022–2026, hint "Brown University", OpenAlex key: NO
+Window 2022–2026, hint "Brown University", OpenAlex key: built-in
 
 ## Wentian Yang
 - OpenAlex candidates (8):
@@ -65,7 +65,6 @@ Window 2022–2026, hint "Brown University", OpenAlex key: NO
   - 2025 · Off-label · The American Journal of Sports Medicine · first · cites 0 · OpenAlex
 
 ## Alan H. Daniels
-- OpenAlex ERROR: HTTP 401 (status 401)
 - OpenAlex candidates (10):
   - [x] (recent) Alan H. Daniels — 923 works, 13550 cites, h=55 — Brown University; Rhode Island Hospital; Northwestern University — topic: Scoliosis diagnosis and treatment
   - [x] (recent) Alan H Daniels — 111 works, 113 cites, h=5 — Brown University; University Orthopedics Center; Georgetown University — topic: Scoliosis diagnosis and treatment
@@ -76,25 +75,32 @@ Window 2022–2026, hint "Brown University", OpenAlex key: NO
   - [ ]  Alan H. Daniels — 2 works, 1 cites, h=1 —  — topic: Wind Energy Research and Development
   - [ ]  Alan H Daniels — 1 works, 0 cites, h=0 —  — topic: Spinal Fractures and Fixation Techniques
 - PubMed: 431 hits · term: `"Daniels, Alan*"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
-- RESULT: 384 papers (OpenAlex raw 0, hidden-elsewhere 0, hidden-unverified 0, PubMed-only added 384, PubMed rejected 40, S2 citations ok=false)
-- Profile purity: 
-- Roles: last 149 / first 18 / middle 217 · cites 0 · per year 78.1
-- Per year: 2022:38 2023:61 2024:82 2025:93 2026:110
-- Topics: 
-- Venues: Spine (64); Journal of neurosurgery. Spine (30); Spine deformity (22); World neurosurgery (21); The spine journal : official journal of the North American Spine Society (17)
-- Coauthors: Bassel G Diebo (215); Peter Gust Passias (119); Virginie Lafage (119); Renaud Lafage (110); Justin S Smith (109); Christopher I Shaffrey (109)
+- RESULT: 537 papers (OpenAlex raw 608, hidden-elsewhere 70, hidden-unverified 8, PubMed-only added 18, PubMed rejected 12, S2 citations ok=false)
+- Profile purity: A5156711090=100%, A5056677929=94%, A5147562131=16%, A5159326397=100%, A5153340503=100%, A5038226553=85%
+- Roles: last 183 / first 20 / middle 334 · cites 3270 · per year 109.2
+- Per year: 2022:97 2023:90 2024:154 2025:103 2026:93
+- Topics: Scoliosis diagnosis and treatment (219); Spine and Intervertebral Disc Pathology (64); Cervical and Thoracic Myelopathy (30); Spinal Fractures and Fixation Techniques (25); Total Knee Arthroplasty Outcomes (20)
+- Venues: The Spine Journal (103); Spine (69); Journal of Neurosurgery Spine (29); Spine Deformity (23); World Neurosurgery (21)
+- Coauthors: Bassel Georges Diebo (307); Peter Gust Passias (204); Renaud Lafage (200); Virginie Lafage (199); Justin S. Smith (184); Christopher I. Shaffrey (181)
 - Duplicate titles left: 0
-- Author affiliation on raw works: 
+- Author affiliation on raw works: MATCH: 516; (none listed): 21; University Orthopedics, Inc, East Providence, RI, US: 11; University Orthopedics, Providence, RI, USA: 6; Department of Orthopaedic Surgery, University Orthopedics, P: 5; University Orthopedics, Providence, RI: 4; University Orthopedics, Inc., East Providence, RI: 4; University Orthopedics, East Providence, RI, US: 4
+- Sample hidden papers:
+  - 2026 · Postoperative thoracic kyphosis morphology following adult spinal deformity surg · [Department of Orthopaedic Surgery, University Orthopedics, Providence, RI, USA]
+  - 2026 · 46. Adult spinal deformity surgery in patients with lower extremity weakness: do · [University Orthopedics, Providence, RI]
+  - 2026 · 113. Increased rates of pseudarthrosis in standalone versus circumferential sing · [University Orthopedics, Inc., RI, USA]
+  - 2026 · 199. Preoperative depression and patient-reported outcomes following anterior ce · [University Orthopedics, Inc, Providence, RI, USA]
+  - 2026 · 164. Do supplementary rod constructs influence the rate of proximal junctional k · [University Orthopedics, RI, USA]
+  - 2026 · 225. The impact of moderate obesity on adult spinal deformity surgical outcomes  · [University Orthopedics, Inc., East Providence, RI]
 - Sample PubMed-only papers:
-  - 2026 · Alignment Factors Associated With the Need for Revision Extension Surgery to the Sacrum Af · Spine · role last
-  - 2026 · The Reply · The American journal of medicine · role last
   - 2026 · Analysis of Success Versus Poor Realignment in Patients With Cervical Deformity : In-Const · Spine · role middle
-  - 2026 · Prevalence of severe sagittal malalignment in patients undergoing short-segment lumbar fus · European spine journal : official public · role last
-  - 2026 · Is There a Cervical Alignment Threshold Warranting Cervical Inclusion in the Construct? · Neurosurgery · role middle
+  - 2026 · Preoperative alignment and risk of proximal junctional failure : a framework for upper ins · The bone & joint journal · role middle
+  - 2026 · Medicare's Benchmarking Spinal DRGs Have Limited Capacity in Capturing the Nuances of Surg · Spine · role middle
+  - 2026 · When are Short Fusions Successful in Cervical Deformity Surgery? · Spine · role middle
+  - 2026 · Bleeding Risk Following Total Shoulder Arthroplasty in Patients Using Selective Serotonin  · Rhode Island medical journal (2013) · role middle
 - Most recent kept:
-  - 2026 · Alignment Factors Associated With the Need for Revision Extension Surgery to the Sacrum Af · Spine · last · cites - · PubMed
-  - 2026 · The Reply · The American journal of medicine · last · cites - · PubMed
   - 2026 · Analysis of Success Versus Poor Realignment in Patients With Cervical Deformity : In-Const · Spine · middle · cites - · PubMed
-  - 2026 · Prevalence of severe sagittal malalignment in patients undergoing short-segment lumbar fus · European spine journal : official public · last · cites - · PubMed
-  - 2026 · Is There a Cervical Alignment Threshold Warranting Cervical Inclusion in the Construct? · Neurosurgery · middle · cites - · PubMed
+  - 2026 · Analysis code for Cost-Effectiveness of Negative-Pressure Wound Therapy After Posterior Lu · Zenodo (CERN European Organization for N · last · cites 0 · OpenAlex
+  - 2026 · Prevalence of severe sagittal malalignment in patients undergoing short-segment lumbar fus · European Spine Journal · last · cites 0 · OpenAlex+PubMed
+  - 2026 · Canadian Spine SocietyLongitudinal changes in comprehensive radiographic parameters follow · Canadian Journal of Surgery · middle · cites 0 · OpenAlex+PubMed
+  - 2026 · Is There a Cervical Alignment Threshold Warranting Cervical Inclusion in the Construct? · Neurosurgery · middle · cites 0 · OpenAlex+PubMed
 

@@ -1,0 +1,100 @@
+# Live audit — 2026-11-01T17:26:43.986Z
+- CORS OpenAlex: HTTP 200, allow-origin=*, allow-headers=Accept, Accept-Language, Accept-Encoding, Authorization, Content-Type, X-OpenAlex-UI, X-Impersonate-User
+- CORS NCBI esearch: HTTP 200, allow-origin=*, allow-headers=null
+- CORS NCBI efetch: HTTP 200, allow-origin=*, allow-headers=null
+- CORS S2 batch preflight: HTTP 204, allow-origin=*, allow-headers=content-type,x-api-key,authorization,x-amz-security-token,x-amz-date
+Window 2022–2026, hint "Brown University", OpenAlex key: NO
+
+## Wentian Yang
+- OpenAlex candidates (10):
+  - [x] (recent) Wentian Yang — 61 works, 4362 cites, h=32 — Brown University; Rhode Island Hospital; Hospital for Special Surgery — topic: Protein Tyrosine Phosphatases
+  - [x] (recent) Wentian Yang — 1 works, 1 cites, h=1 — Brown University — topic: Rheumatoid Arthritis Research and Therapies
+  - [ ]  Wentian Yang — 2 works, 7 cites, h=1 — Qingdao Agricultural University — topic: Remote Sensing in Agriculture
+  - [ ]  Yang Wentian — 2 works, 0 cites, h=0 —  — topic: Research on Leishmaniasis Studies
+  - [ ]  Wentian Yang — 1 works, 6 cites, h=1 — Shandong Agricultural University — topic: Adsorption and biosorption for pollutant removal
+  - [ ]  Wentian Yang — 1 works, 0 cites, h=0 — Dalian University of Technology — topic: Neural Networks and Applications
+  - [ ]  wentian yang — 1 works, 0 cites, h=0 —  — topic: Video Surveillance and Tracking Methods
+  - [ ]  Wentian Yang — 1 works, 0 cites, h=0 — Shandong Agricultural University — topic: Polymer composites and self-healing
+- PubMed: 6 hits · term: `"Yang, Wentian"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
+- RESULT: 7 papers (OpenAlex raw 7, hidden-elsewhere 0, hidden-unverified 0, PubMed-only added 0, PubMed rejected 0)
+- Profile purity: A5143767883=100%, A5071869928=100%
+- Roles: last 3 / first 1 / middle 3 · cites 64 · per year 1.4
+- Per year: 2022:1 2023:1 2024:1 2025:3 2026:1
+- Topics: Protein Tyrosine Phosphatases (2); Rheumatoid Arthritis Research and Therapies (1); Bone Tumor Diagnosis and Treatments (1); Myeloproliferative Neoplasms: Diagnosis and Treatment (1); Osteoarthritis Treatment and Mechanisms (1)
+- Venues: Genes (2); Bone Research (2); The Journal of Immunology (1); Blood (1); The FASEB Journal (1)
+- Coauthors: Shaomeng Wang (2); Jake Littman (2); Roy K. Aaron (2); Véronique Lefebvre (2); Lijun Wang (2); Huiliang Yang (2)
+- Duplicate titles left: 0
+- Author affiliation on raw works: MATCH: 7
+- Most recent kept:
+  - 2026 · PROTAC-Mediated SHP2 and STAT3 Degradation as a Therapeutic Strategy for Rheumatoid Arthri · The Journal of Immunology · last · cites 1 · OpenAlex
+  - 2025 · The GNAS Gene: Fibrous Dysplasia, McCune–Albright Syndrome, and Skeletal Structure and Fun · Genes · middle · cites 1 · OpenAlex+PubMed
+  - 2025 · HiJAKing the hematopoietic system: a low-frequency JAK2V617F clone drives myeloproliferati · Blood · middle · cites 4 · OpenAlex+PubMed
+  - 2025 · PTPN11 in cartilage development, adult homeostasis, and diseases · Bone Research · first · cites 6 · OpenAlex+PubMed
+  - 2024 · SHP2 ablation mitigates osteoarthritic cartilage degeneration by promoting chondrocyte ana · The FASEB Journal · last · cites 7 · OpenAlex+PubMed
+
+## Braden C. Fleming
+- OpenAlex candidates (2):
+  - [x] (recent) Braden C. Fleming — 324 works, 16152 cites, h=75 — Brown University; Rhode Island Hospital; University of Vermont — topic: Knee injuries and reconstruction techniques
+  - [ ]  Braden C. Fleming — 2 works, 0 cites, h=0 — Murdoch University — topic: Animal Nutrition and Physiology
+- PubMed: 35 hits · term: `("Fleming, Braden"[fau] OR "Fleming, Braden C"[fau]) AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
+- RESULT: 43 papers (OpenAlex raw 48, hidden-elsewhere 7, hidden-unverified 0, PubMed-only added 3, PubMed rejected 0, S2 citations ok=false)
+- Profile purity: A5010258663=84%
+- Roles: last 12 / first 4 / middle 27 · cites 268 · per year 8.7
+- Per year: 2022:16 2023:9 2024:7 2025:7 2026:4
+- Topics: Knee injuries and reconstruction techniques (25); Osteoarthritis Treatment and Mechanisms (10); Medical Image Segmentation Techniques (2); Pharmaceutical studies and practices (1); Elasticity and Material Modeling (1)
+- Venues: The American Journal of Sports Medicine (10); Orthopaedic Journal of Sports Medicine (6); Journal of Orthopaedic Research® (5); Bioengineering (3); PLoS ONE (3)
+- Coauthors: Martha Meaney Murray (25); Ata M. Kiapour (17); Jillian E. Beveridge (13); Benedikt Lorenz Proffen (13); Meggin Q. Costa (12); Janine D. Bacic (11)
+- Duplicate titles left: 0
+- Author affiliation on raw works: MATCH: 38; (none listed): 3; Boston Children's Hospital: 2; Brooke Army Medical Center: 1; United States Geological Survey: 1; Cleveland Clinic: 1; University of Vermont: 1; BEAR-MOON Design Group: All authors are listed in the Author: 1
+- Sample hidden papers:
+  - 2024 · Poster 350: Do Early Radiographic Changes at 2 Years Predict Increased Pain at 6 · [Brooke Army Medical Center | Cleveland Clinic | The Ohio State University Wexner]
+  - 2024 · A spatial machine learning model developed from noisy data requires multiscale p · [United States Geological Survey | U.S. Geological Survey, 215 Limekiln Rd, New C]
+  - 2023 · Paper 27: Preoperative Risk Factors of Subsequent Ipsilateral ACL Revision Surge · [Boston Children's Hospital | Harvard University | Boston Children’s Hospital, Ha]
+  - 2022 · Changes in the Cross-Sectional Profile of Treated Anterior Cruciate Ligament Wit · [Boston Children's Hospital | Harvard University | Investigation performed at Bos]
+  - 2022 · Meniscal Treatment as a Predictor of Worse Articular Cartilage Damage on MRI at  · [Cleveland Clinic | Vanderbilt University Medical Center | Investigation performe]
+  - 2022 · Psychological Readiness to Return to Sport at 6 Months Is Higher After Bridge-En · [University of Vermont | Boston Children's Hospital | Department of Medical Biost]
+- Sample PubMed-only papers:
+  - 2024 · Structure and Function Are Not the Same: The Case for Restoring Mechanoreceptor Continuity · Rhode Island medical journal (2013) · role last
+  - 2022 · Terminal sterilization influences the efficacy of an extracellular matrix-blood composite  · Journal of orthopaedic research : offici · role middle
+  - 2022 · A transfer learning approach for automatic segmentation of the surgically treated anterior · Journal of orthopaedic research : offici · role last
+- Most recent kept:
+  - 2026 · Longitudinal Quantitative Mapping of Meniscal Morphological and Signal Intensity Differenc · The American Journal of Sports Medicine · last · cites 0 · OpenAlex+PubMed
+  - 2026 · Magnetic Resonance Imaging Assessment of Bridge-Enhanced ACL Restoration: An Imaging Atlas · Orthopaedic Journal of Sports Medicine · middle · cites 0 · OpenAlex+PubMed
+  - 2026 · Passive Laxity With Functional Stability Reveals Potential Bilateral Dynamic Compensatory  · Orthopaedic Journal of Sports Medicine · last · cites 0 · OpenAlex+PubMed
+  - 2026 · Quantitative mapping of meniscus morphology using advanced imaging analysis in young patie · Scientific Reports · last · cites 1 · OpenAlex+PubMed
+  - 2025 · Off-label · The American Journal of Sports Medicine · first · cites 0 · OpenAlex
+
+## Alan H. Daniels
+- OpenAlex ERROR: HTTP 401 (status 401)
+- OpenAlex candidates (10):
+  - [x] (recent) Alan H. Daniels — 923 works, 13550 cites, h=55 — Brown University; Rhode Island Hospital; Northwestern University — topic: Scoliosis diagnosis and treatment
+  - [x] (recent) Alan H Daniels — 111 works, 113 cites, h=5 — Brown University; University Orthopedics Center; Georgetown University — topic: Scoliosis diagnosis and treatment
+  - [x] (recent) Alan H. Daniels — 41 works, 0 cites, h=0 — Brown University — topic: Scoliosis diagnosis and treatment
+  - [x] (recent) Alan H. Daniels — 2 works, 0 cites, h=0 — Brown University — topic: Spine and Intervertebral Disc Pathology
+  - [x] (recent) Alan H. Daniels — 1 works, 0 cites, h=0 — Brown University — topic: Musculoskeletal pain and rehabilitation
+  - [x] (recent) Alan H. Daniels — 1 works, 0 cites, h=0 — Brown University — topic: Musculoskeletal pain and rehabilitation
+  - [ ]  Alan H. Daniels — 2 works, 1 cites, h=1 —  — topic: Wind Energy Research and Development
+  - [ ]  Alan H Daniels — 1 works, 0 cites, h=0 —  — topic: Spinal Fractures and Fixation Techniques
+- PubMed: 431 hits · term: `("Daniels, Alan"[fau] OR "Daniels, Alan H"[fau]) AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
+- RESULT: 422 papers (OpenAlex raw 0, hidden-elsewhere 0, hidden-unverified 0, PubMed-only added 422, PubMed rejected 2, S2 citations ok=false)
+- Profile purity: 
+- Roles: last 174 / first 18 / middle 230 · cites 2785 · per year 85.8
+- Per year: 2022:46 2023:68 2024:88 2025:100 2026:120
+- Topics: 
+- Venues: Spine (71); Journal of neurosurgery. Spine (30); The Journal of bone and joint surgery. American volume (22); Spine deformity (22); The Journal of the American Academy of Orthopaedic Surgeons (21)
+- Coauthors: Bassel G Diebo (231); Peter Gust Passias (121); Virginie Lafage (120); Mohammad Daher (113); Renaud Lafage (111); Justin S Smith (109)
+- Duplicate titles left: 0
+- Author affiliation on raw works: 
+- Sample PubMed-only papers:
+  - 2026 · Alignment Factors Associated With the Need for Revision Extension Surgery to the Sacrum Af · Spine · role last
+  - 2026 · The Reply · The American journal of medicine · role last
+  - 2026 · Analysis of Success Versus Poor Realignment in Patients With Cervical Deformity : In-Const · Spine · role middle
+  - 2026 · Prevalence of severe sagittal malalignment in patients undergoing short-segment lumbar fus · European spine journal : official public · role last
+  - 2026 · Is There a Cervical Alignment Threshold Warranting Cervical Inclusion in the Construct? · Neurosurgery · role middle
+- Most recent kept:
+  - 2026 · Alignment Factors Associated With the Need for Revision Extension Surgery to the Sacrum Af · Spine · last · cites 0 · PubMed
+  - 2026 · The Reply · The American journal of medicine · last · cites 0 · PubMed
+  - 2026 · Analysis of Success Versus Poor Realignment in Patients With Cervical Deformity : In-Const · Spine · middle · cites 0 · PubMed
+  - 2026 · Prevalence of severe sagittal malalignment in patients undergoing short-segment lumbar fus · European spine journal : official public · last · cites 0 · PubMed
+  - 2026 · Is There a Cervical Alignment Threshold Warranting Cervical Inclusion in the Construct? · Neurosurgery · middle · cites 0 · PubMed
+

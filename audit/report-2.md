@@ -1,9 +1,9 @@
-# Live audit — 2026-11-01T17:28:43.850Z
+# Live audit — 2026-11-01T19:37:45.209Z
 - CORS OpenAlex: HTTP 200, allow-origin=*, allow-headers=Accept, Accept-Language, Accept-Encoding, Authorization, Content-Type, X-OpenAlex-UI, X-Impersonate-User
 - CORS NCBI esearch: HTTP 200, allow-origin=*, allow-headers=null
 - CORS NCBI efetch: HTTP 200, allow-origin=*, allow-headers=null
 - CORS S2 batch preflight: HTTP 204, allow-origin=*, allow-headers=content-type,x-api-key,authorization,x-amz-security-token,x-amz-date
-Window 2022–2026, hint "Brown University", OpenAlex key: NO
+Window 2022–2026, hint "Brown University", OpenAlex key: built-in
 
 ## Lei Wei
 - OpenAlex candidates (18):
@@ -16,9 +16,9 @@ Window 2022–2026, hint "Brown University", OpenAlex key: NO
   - [ ] (ever) Lei Wei — 75 works, 429 cites, h=10 — Third Affiliated Hospital of Sun Yat-sen University; Tianjin University of Traditional Chi — topic: Cancer Genomics and Diagnostics
   - [ ] (ever) Lei Wei — 41 works, 1224 cites, h=18 — Ludong University; Qingdao University; Memorial Sloan Kettering Cancer Center — topic: DNA Repair Mechanisms
 - PubMed: 12 hits · term: `"Wei, Lei*"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
-- RESULT: 8 papers (OpenAlex raw 3, hidden-elsewhere 0, hidden-unverified 0, PubMed-only added 7, PubMed rejected 0, S2 citations ok=false)
+- RESULT: 8 papers (OpenAlex raw 3, hidden-elsewhere 0, hidden-unverified 0, PubMed-only added 7, PubMed rejected 0, S2 citations ok=true)
 - Profile purity: A5158500398=100%, A5145974587=100%, A5136600835=100%
-- Roles: last 4 / first 0 / middle 4 · cites 0 · per year 1.6
+- Roles: last 4 / first 0 / middle 4 · cites 105 · per year 1.6
 - Per year: 2022:0 2023:4 2024:1 2025:2 2026:1
 - Topics: Bone Metabolism and Diseases (1)
 - Venues: Connective Tissue Research (1); Research (Washington, D.C.) (1); The Journal of pharmacology and experimental therapeutics (1); The American journal of sports medicine (1); Biomolecules (1)
@@ -33,10 +33,10 @@ Window 2022–2026, hint "Brown University", OpenAlex key: NO
   - 2023 · FAR591 promotes the pathogenesis and progression of SONFH by regulating Fos expression to  · Bone research · role middle
 - Most recent kept:
   - 2026 · Osteoclast-lineage Indian hedgehog sustains RANKL-induced osteoclastogenesis and bone reso · Connective Tissue Research · middle · cites 0 · OpenAlex+PubMed
-  - 2025 · B-Lymphoid Tyrosine Kinase Crosslinks Redox and Apoptosis Signaling Networks to Promote th · Research (Washington, D.C.) · middle · cites - · PubMed
-  - 2025 · The protective effect of irisin against hemorrhagic injury is mediated by PI3K and p38 pat · The Journal of pharmacology and experime · middle · cites - · PubMed
-  - 2024 · Alpha-2-Macroglobulin Attenuates Posttraumatic Osteoarthritis Cartilage Damage by Inhibiti · The American journal of sports medicine · last · cites - · PubMed
-  - 2023 · The Effects of an Osteoarthritic Joint Environment on ACL Damage and Degeneration: A Yucat · Biomolecules · last · cites - · PubMed
+  - 2025 · B-Lymphoid Tyrosine Kinase Crosslinks Redox and Apoptosis Signaling Networks to Promote th · Research (Washington, D.C.) · middle · cites 10 · PubMed
+  - 2025 · The protective effect of irisin against hemorrhagic injury is mediated by PI3K and p38 pat · The Journal of pharmacology and experime · middle · cites 0 · PubMed
+  - 2024 · Alpha-2-Macroglobulin Attenuates Posttraumatic Osteoarthritis Cartilage Damage by Inhibiti · The American journal of sports medicine · last · cites 12 · PubMed
+  - 2023 · The Effects of an Osteoarthritic Joint Environment on ACL Damage and Degeneration: A Yucat · Biomolecules · last · cites 0 · PubMed
 
 ## Gregory D. Jay
 - OpenAlex candidates (2):

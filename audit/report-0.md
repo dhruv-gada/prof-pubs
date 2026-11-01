@@ -1,9 +1,9 @@
-# Live audit — 2026-11-01T17:28:46.014Z
+# Live audit — 2026-11-01T19:37:43.169Z
 - CORS OpenAlex: HTTP 200, allow-origin=*, allow-headers=Accept, Accept-Language, Accept-Encoding, Authorization, Content-Type, X-OpenAlex-UI, X-Impersonate-User
 - CORS NCBI esearch: HTTP 200, allow-origin=*, allow-headers=null
 - CORS NCBI efetch: HTTP 200, allow-origin=*, allow-headers=null
 - CORS S2 batch preflight: HTTP 204, allow-origin=*, allow-headers=content-type,x-api-key,authorization,x-amz-security-token,x-amz-date
-Window 2022–2026, hint "Brown University", OpenAlex key: NO
+Window 2022–2026, hint "Brown University", OpenAlex key: built-in
 
 ## Qian Chen
 - OpenAlex candidates (32):
@@ -70,9 +70,9 @@ Window 2022–2026, hint "Brown University", OpenAlex key: NO
 - OpenAlex candidates (1):
   - [x] (recent) Joseph John Crisco — 346 works, 16803 cites, h=68 — Brown University; Rhode Island Hospital; Rutgers, The State University of New Jersey — topic: Orthopedic Surgery and Rehabilitation
 - PubMed: 28 hits · term: `"Crisco, Joseph*"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
-- RESULT: 32 papers (OpenAlex raw 30, hidden-elsewhere 0, hidden-unverified 0, PubMed-only added 3, PubMed rejected 0, S2 citations ok=true)
+- RESULT: 32 papers (OpenAlex raw 30, hidden-elsewhere 0, hidden-unverified 0, PubMed-only added 3, PubMed rejected 0, S2 citations ok=false)
 - Profile purity: A5019062338=100%
-- Roles: last 15 / first 5 / middle 12 · cites 115 · per year 6.5
+- Roles: last 15 / first 5 / middle 12 · cites 102 · per year 6.5
 - Per year: 2022:7 2023:3 2024:8 2025:9 2026:5
 - Topics: Orthopedic Surgery and Rehabilitation (16); Orthopaedic implants and arthroplasty (4); Medical Image Segmentation Techniques (3); Traumatic Brain Injury Research (2); Osteoarthritis Treatment and Mechanisms (1)
 - Venues: Journal of Biomechanics (7); Journal of Orthopaedic Research® (3); The Journal Of Hand Surgery (2); Hand (New York, N.Y.) (2); Frontiers in Bioengineering and Biotechnology (1)

@@ -138,7 +138,7 @@ footer{margin-top:30px;font-size:12px;color:var(--muted)}
 
     <div class="settings" id="settings">
       <label class="f">OpenAlex API key (free)
-        <input type="password" id="keyInput" placeholder="Paste key from openalex.org/settings/api">
+        <input type="password" id="keyInput" placeholder="Optional: the site already has a key built in">
       </label>
       <label class="f">Your email (optional, for NCBI/PubMed etiquette)
         <input type="text" id="emailInput" placeholder="you@example.com">
@@ -305,6 +305,8 @@ const store = {
   get(k,d=""){try{return localStorage.getItem("fpa_"+k) ?? d}catch(e){return d}},
   set(k,v){try{localStorage.setItem("fpa_"+k,v)}catch(e){}}
 };
+const DEFAULT_OA_KEY = "nUOonKFU4JyiAMexl3wY9v"; // site-wide OpenAlex key (a key saved in Data settings overrides it)
+const oaKey = ()=> store.get("key") || DEFAULT_OA_KEY;
 const $ = s=>document.querySelector(s);
 const esc = s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const fmt = n=>n==null?"–":Number(n).toLocaleString("en-US");
@@ -316,7 +318,7 @@ $("#saveSettings").onclick = ()=>{
   store.set("key",$("#keyInput").value.trim()); store.set("email",$("#emailInput").value.trim());
   setStatus("Settings saved."); $("#settings").classList.remove("open");
 };
-if(!store.get("key")) $("#settings").classList.add("open");
+if(!oaKey()) $("#settings").classList.add("open");
 
 function renderRoster(){
   $("#roster").innerHTML = ROSTER.map(g=>`<div><h3>${esc(g.group)}</h3><div class="chips">${
@@ -359,7 +361,7 @@ const sleep = ms=>new Promise(r=>setTimeout(r,ms));
 function oa(path, params){
   const u = new URL("https://api.openalex.org/"+path);
   Object.entries(params).forEach(([k,v])=>u.searchParams.set(k,v));
-  const key = store.get("key"); if(key) u.searchParams.set("api_key",key);
+  const key = oaKey(); if(key) u.searchParams.set("api_key",key);
   return getJSON(u.toString());
 }
 let lastNcbi = 0;

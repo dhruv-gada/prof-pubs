@@ -35,7 +35,7 @@ for (const [label, url, opts] of [
     log(`- CORS ${label}: HTTP ${r.status}, allow-origin=${r.headers.get("access-control-allow-origin")}, allow-headers=${r.headers.get("access-control-allow-headers")}`);
   } catch (e) { log(`- CORS ${label}: ${e.message}`); }
 }
-log(`Window ${fromYear}–${toYear}, hint "${hint}", OpenAlex key: ${process.env.OPENALEX_KEY ? "yes" : "NO"}`);
+log(`Window ${fromYear}–${toYear}, hint "${hint}", OpenAlex key: ${process.env.OPENALEX_KEY ? "env" : ev("oaKey()") ? "built-in" : "NO"}`);
 log();
 
 for (const name of names) {

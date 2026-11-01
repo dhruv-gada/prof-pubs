@@ -384,13 +384,13 @@ function instMatches(text, hint){
 }
 const L = s=>strip(String(s||"")).toLowerCase().replace(/[^a-z]/g,"");
 // Is this OpenAlex/PubMed name the same person-name as the one typed? (surname + first name, or initial)
-function namesCompatible(candName, wanted){
+function namesCompatible(candName, wanted, allowSwap=true){
   const a=parseName(candName), w=parseName(wanted);
   const al=L(a.last), af=L(a.first), wl=L(w.last), wf=L(w.first);
   const afull=L([a.first,...a.middles].join("")), wfull=L([w.first,...w.middles].join(""));
   const firstOK = ()=> !af || !wf || af===wf || afull===wf || af===wfull || afull===wfull || ((af.length===1||wf.length===1) && af[0]===wf[0]);
   if(al===wl && firstOK()) return true;
-  if(al===wf && af===wl) return true;               // "Wei Lei" written for "Lei Wei"
+  if(allowSwap && al===wf && af===wl) return true;   // "Wei Lei" written for "Lei Wei"
   return false;
 }
 const instCache = {};
@@ -411,7 +411,8 @@ async function findAuthors(name, hint, fromYear){
   const byId = new Map();
   [...(atInst.results||[]), ...(first.results||[])].forEach(a=>{ if(!byId.has(a.id)) byId.set(a.id,a); });
   const recentFrom = (fromYear||new Date().getFullYear()-4) - 1;
-  const res = [...byId.values()].filter(a=>namesCompatible(a.display_name, name)).map(a=>{
+  const all = [...byId.values()], direct = all.filter(a=>namesCompatible(a.display_name, name, false));
+  const res = (direct.length ? direct : all.filter(a=>namesCompatible(a.display_name, name))).map(a=>{
     const insts = [...(a.last_known_institutions||[]).map(i=>i.display_name), ...(a.affiliations||[]).map(x=>x.institution?.display_name)].filter(Boolean);
     const affEver = insts.some(i=>instMatches(i,hint));
     const affRecent = (a.last_known_institutions||[]).some(i=>instMatches(i.display_name,hint)) ||
@@ -433,19 +434,18 @@ async function fetchWorks(authorIds, fromYear){
   }
   return out;
 }
+const WEAK_VENUE = /ssrn|zenodo|^pubmed|pubmed central|europe pmc|repository|arxiv|biorxiv|medrxiv|research square|preprints|figshare|osf|digital commons|scholarworks/i;
 function pickVenue(w){
   const locs = [w.primary_location, ...(w.locations||[])].filter(l=>l && l.source);
   const j = locs.find(l=>["journal","conference","book series","ebook platform"].includes(l.source.type));
-  if(j) return {venue:j.source.display_name, weak:false};
+  if(j && !WEAK_VENUE.test(j.source.display_name)) return {venue:j.source.display_name, weak:false};
   return {venue: locs[0]?.source?.display_name || (w.type==="preprint"?"Preprint":"—"), weak:true};
 }
 
 /* ---------------- PubMed ---------------- */
 function pubmedTerm(name, hint, fromYear){
   const p = parseName(name);
-  const au = p.first.length>1
-    ? (p.middles.length ? `("${p.last}, ${p.first}"[fau] OR "${p.last}, ${p.first} ${p.middles[0][0]}"[fau])` : `"${p.last}, ${p.first}"[fau]`)
-    : `"${p.last} ${p.initials}"[au]`;
+  const au = p.first.length>1 ? `"${p.last}, ${p.first}*"[fau]` : `"${p.last} ${p.initials}"[au]`;
   let aff = "";
   if(hint){
     const extra = /brown/i.test(hint) ? ` OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]` : "";
@@ -489,8 +489,9 @@ async function s2Citations(papers){
     try{
       const r = await fetch("https://api.semanticscholar.org/graph/v1/paper/batch?fields=citationCount",{method:"POST",
         headers:{"Content-Type":"application/json"}, body:JSON.stringify({ids:chunk.map(p=>p.pmid?`PMID:${p.pmid}`:`DOI:${p.doi}`)})});
-      if(!r.ok) return false;
-      const d = await r.json();
+      let rr = r; if(rr.status===429){ await sleep(2000); rr = await fetch("https://api.semanticscholar.org/graph/v1/paper/batch?fields=citationCount",{method:"POST",headers:{"Content-Type":"application/json"}, body:JSON.stringify({ids:chunk.map(p=>p.pmid?`PMID:${p.pmid}`:`DOI:${p.doi}`)})}); }
+      if(!rr.ok) return false;
+      const d = await rr.json();
       d.forEach((x,j)=>{ if(x && typeof x.citationCount==="number"){ chunk[j].cites = x.citationCount; chunk[j].citeSrc="Semantic Scholar"; } });
     }catch(e){ return false; }
   }
@@ -554,7 +555,7 @@ function buildPapers(works, pmItems, authorIds, name, hint, strict, includeElsew
     const idx = (it.authors||[]).findIndex(a=>namesCompatible(`${a.fore||a.initials} ${a.last}`, name) && L(a.last)===L(p.last));
     if(idx<0){ pmRejected++; continue; }
     const me = it.authors[idx], meAff = me.affs.join(" | "), affOK = !hint || instMatches(meAff,hint);
-    if(hint && me.affs.length && !affOK && !includeElsewhere){ pmRejected++; continue; }
+    if(hint && !affOK && !includeElsewhere){ pmRejected++; continue; }
     if(dropped.has(pmid) || (doi && dropped.has(doi)) || dropped.has(t)){ if(!(me.affs.length && affOK)) continue; } // PubMed's own affiliation can rescue a paper OpenAlex mislabeled
     if(strict && !me.affs.length) { pmRejected++; continue; }
     const n = it.authors.length;
@@ -583,7 +584,7 @@ function analyze(papers, fromYear, toYear){
   const cites = withCites.reduce((s,p)=>s+p.cites,0);
   const oaKnown = papers.filter(p=>p.oa!=null), oaShare = oaKnown.length ? oaKnown.filter(p=>p.oa).length/oaKnown.length : null;
   const count = (arr)=>{const m=new Map(); arr.forEach(k=>{ if(k) m.set(k,(m.get(k)||0)+1)}); return [...m.entries()].sort((a,b)=>b[1]-a[1]);};
-  const venues = count(papers.map(p=>p.venue).filter(v=>v&&v!=="—"));
+  const venues = count(papers.filter(p=>!p.venueWeak).map(p=>p.venue).filter(v=>v&&v!=="—"));
   // topics with trend: share in last 2 years vs earlier
   const recentCut = toYear-1;
   const tp = papers.filter(p=>p.topic);
@@ -785,7 +786,7 @@ function filtered(){
 function renderTable(keep){
   if(!STATE) return; if(keep!==true) shown=25; const all = filtered(), rows = all.slice(0,shown);
   $("#pubTable tbody").innerHTML = rows.map(p=>`<tr>
-    <td><div class="ptitle">${esc(p.title)}</div><div class="pmeta">${esc(p.venue)}${p.type&&p.type!=="article"?` · ${esc(p.type.split(",")[0])}`:""} · ${p.nAuthors} authors${p.oa?' · <span class="tag">open access</span>':""}${p.src.length===1&&p.src[0]==="PubMed"?' · <span class="tag">PubMed only</span>':""}</div></td>
+    <td><div class="ptitle">${esc(p.title)}</div><div class="pmeta">${p.venueWeak?"Not in a journal yet · ":""}${esc(p.venue)}${p.type&&p.type!=="article"?` · ${esc(p.type.split(",")[0])}`:""} · ${p.nAuthors} authors${p.oa?' · <span class="tag">open access</span>':""}${p.src.length===1&&p.src[0]==="PubMed"?' · <span class="tag">PubMed only</span>':""}</div></td>
     <td class="n">${p.year||""}</td><td class="col-hide">${roleLabel(p.role)}</td><td class="n">${p.cites==null?"–":fmt(p.cites)}</td>
     <td class="col-hide" style="white-space:nowrap">${scholarLink(p)}${p.doi?` · <a href="https://doi.org/${esc(p.doi)}" target="_blank" rel="noopener">DOI</a>`:""}${p.pmid?` · <a href="https://pubmed.ncbi.nlm.nih.gov/${p.pmid}/" target="_blank" rel="noopener">PubMed</a>`:""}</td></tr>`).join("");
   $("#tableNote").textContent = `${rows.length} of ${all.length} papers shown${all.length<STATE.papers.length?` (filtered from ${STATE.papers.length})`:""}.`;

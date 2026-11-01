@@ -15,7 +15,8 @@ const ev = (s) => W.eval(s);
 if (process.env.OPENALEX_KEY) ev(`store.set("key", ${JSON.stringify(process.env.OPENALEX_KEY)})`);
 
 const extra = (process.env.EXTRA_NAMES || "Anubhav Tripathi").split(",").map((s) => s.trim()).filter(Boolean);
-const names = [...ev("ROSTER_FLAT").map((p) => p.name), ...extra];
+let names = [...ev("ROSTER_FLAT").map((p) => p.name), ...extra];
+if (process.env.BATCH) { const [i, n] = process.env.BATCH.split("/").map(Number); names = names.filter((_, k) => k % n === i); }
 const hint = "Brown University";
 const toYear = new Date().getFullYear(), fromYear = toYear - 4;
 const out = [];
@@ -23,6 +24,17 @@ const log = (s = "") => out.push(s);
 const short = (t, n = 110) => (t || "").replace(/\s+/g, " ").slice(0, n);
 
 log(`# Live audit — ${new Date().toISOString()}`);
+// CORS checks (what a browser would see)
+for (const [label, url, opts] of [
+  ["OpenAlex", "https://api.openalex.org/works?per_page=1", {}],
+  ["NCBI esearch", "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=cartilage&retmode=json&retmax=0", {}],
+  ["NCBI efetch", "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=31452104&retmode=xml", {}],
+  ["S2 batch preflight", "https://api.semanticscholar.org/graph/v1/paper/batch?fields=citationCount", { method: "OPTIONS", headers: { "Access-Control-Request-Method": "POST", "Access-Control-Request-Headers": "content-type" } }],
+]) {
+  try { const r = await fetch(url, { ...opts, headers: { Origin: "https://prof-pubs.onrender.com", ...(opts.headers || {}) } });
+    log(`- CORS ${label}: HTTP ${r.status}, allow-origin=${r.headers.get("access-control-allow-origin")}, allow-headers=${r.headers.get("access-control-allow-headers")}`);
+  } catch (e) { log(`- CORS ${label}: ${e.message}`); }
+}
 log(`Window ${fromYear}–${toYear}, hint "${hint}", OpenAlex key: ${process.env.OPENALEX_KEY ? "yes" : "NO"}`);
 log();
 
@@ -30,7 +42,7 @@ for (const name of names) {
   log(`## ${name}`);
   let cands = [], works = [], pm = { items: [], count: 0, term: "" }, oaErr = null;
   try {
-    cands = await ev("findAuthors")(name, hint);
+    cands = await ev("findAuthors")(name, hint, fromYear);
     const sel = cands.filter((c) => c.selected);
     if (sel.length) works = await ev("fetchWorks")(sel.map((c) => ev("shortId")(c.id)), fromYear);
   } catch (e) { oaErr = e; }
@@ -38,15 +50,17 @@ for (const name of names) {
   if (oaErr) log(`- OpenAlex ERROR: ${oaErr.message} (status ${oaErr.status ?? "?"})`);
   log(`- OpenAlex candidates (${cands.length}):`);
   for (const c of cands.slice(0, 8)) {
-    log(`  - ${c.selected ? "[x]" : "[ ]"} ${c.display_name} — ${c.works_count} works, ${c.cited_by_count} cites, h=${c.summary_stats?.h_index ?? "?"} — ${short(c.insts.slice(0, 3).join("; "), 90)} — topic: ${c.topics?.[0]?.display_name ?? "-"}`);
+    log(`  - ${c.selected ? "[x]" : "[ ]"} ${c.affRecent ? "(recent)" : c.affEver ? "(ever)" : ""} ${c.display_name} — ${c.works_count} works, ${c.cited_by_count} cites, h=${c.summary_stats?.h_index ?? "?"} — ${short(c.insts.slice(0, 3).join("; "), 90)} — topic: ${c.topics?.[0]?.display_name ?? "-"}`);
   }
   log(`- PubMed: ${pm.count} hits · term: \`${pm.term}\``);
 
   const sel = cands.filter((c) => c.selected);
   const ids = new Set(sel.map((c) => ev("shortId")(c.id)));
   const r = ev("buildPapers")(works, pm.items, sel.map((c) => c.id), name, hint, false, false);
+  let s2 = null; if (r.papers.some((p) => p.cites == null)) s2 = await ev("s2Citations")(r.papers);
   const A = ev("analyze")(r.papers, fromYear, toYear);
-  log(`- RESULT: ${A.n} papers (OpenAlex raw ${works.length}, hidden-elsewhere ${r.droppedElsewhere}, PubMed-only added ${r.pmOnly})`);
+  log(`- RESULT: ${A.n} papers (OpenAlex raw ${works.length}, hidden-elsewhere ${r.droppedElsewhere}, hidden-unverified ${r.droppedUnverified}, PubMed-only added ${r.pmOnly}, PubMed rejected ${r.pmRejected}${s2 === null ? "" : `, S2 citations ok=${s2}`})`);
+  log(`- Profile purity: ${Object.entries(r.purity).map(([k, v]) => `${k}=${(v * 100).toFixed(0)}%`).join(", ")}`);
   log(`- Roles: last ${A.role.last} / first ${A.role.first} / middle ${A.role.middle} · cites ${A.cites} · per year ${A.perYearAvg.toFixed(1)}`);
   log(`- Per year: ${A.perYear.map((y) => `${y.year}:${y.first + y.middle + y.last}`).join(" ")}`);
   log(`- Topics: ${A.topics.slice(0, 5).map((t) => `${t.t} (${t.c})`).join("; ")}`);

@@ -169,7 +169,10 @@ footer{margin-top:30px;font-size:12px;color:var(--muted)}
         <div class="note" style="margin:8px 0">Common names can have several profiles, and one person is sometimes split across two. Tick every profile that is this professor, then re-run.</div>
         <div id="candList"></div>
         <label class="note" style="display:flex;gap:6px;align-items:center;margin:8px 0">
-          <input type="checkbox" id="strictAff"> Only count papers where this author lists the institution hint (stricter, helps with common names)
+          <input type="checkbox" id="inclElsewhere"> Include papers where they're listed at a different institution (off by default, since that's usually another person with the same name)
+        </label>
+        <label class="note" style="display:flex;gap:6px;align-items:center;margin:8px 0">
+          <input type="checkbox" id="strictAff"> Also drop papers with no affiliation recorded (strictest, for very common names)
         </label>
         <button class="btn small" id="rerunBtn" type="button">Re-run with selected profiles</button>
       </details>
@@ -370,12 +373,14 @@ async function ncbi(tool, params){
 const shortId = id=>String(id||"").replace("https://openalex.org/","");
 
 /* ---------------- OpenAlex ---------------- */
+const BROWN_ALIASES = ["rhode island hospital","lifespan","brown health","brown university health","miriam hospital","hasbro","bradley hospital","butler hospital","women and infants","women & infants","providence va","providence veterans","alpert medical","newport hospital","emma pendleton"];
 function instMatches(text, hint){
   if(!hint) return false;
   const t = strip(String(text||"")).toLowerCase();
   const words = strip(hint).toLowerCase().split(/\s+/).filter(w=>w.length>2 && !["university","the","of","and","school","college","institute"].includes(w));
-  if(!words.length) return t.includes(strip(hint).toLowerCase());
-  return words.every(w=>t.includes(w));
+  if(words.length ? words.every(w=>t.includes(w)) : t.includes(strip(hint).toLowerCase())) return true;
+  if(/brown/i.test(hint)) return BROWN_ALIASES.some(a=>t.includes(a));
+  return false;
 }
 async function findAuthors(name, hint){
   const data = await oa("authors",{search:name, per_page:"15",
@@ -415,10 +420,12 @@ async function fetchWorks(authorIds, fromYear){
 /* ---------------- PubMed ---------------- */
 function pubmedTerm(name, hint, fromYear){
   const p = parseName(name);
-  const au = `("${p.last} ${p.initials}"[au] OR "${p.last}, ${p.first}"[fau])`;
+  const au = p.first.length>1
+    ? (p.middles.length ? `("${p.last}, ${p.first}"[fau] OR "${p.last}, ${p.first} ${p.middles[0][0]}"[fau])` : `"${p.last}, ${p.first}"[fau]`)
+    : `"${p.last} ${p.initials}"[au]`;
   let aff = "";
   if(hint){
-    const extra = /brown/i.test(hint) ? ` OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Providence, RI"[ad]` : "";
+    const extra = /brown/i.test(hint) ? ` OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]` : "";
     aff = ` AND ("${hint}"[ad]${extra})`;
   }
   return `${au}${aff} AND ("${fromYear}/01/01"[dp] : "3000"[dp])`;
@@ -439,17 +446,19 @@ async function pubmedSearch(name, hint, fromYear, countOnly=false){
 /* ---------------- Merge into one paper list ---------------- */
 const EXCLUDE_TYPES = new Set(["erratum","paratext","retraction","peer-review","editorial-erratum"]);
 const normTitle = t=>strip(String(t||"")).toLowerCase().replace(/<[^>]+>/g,"").replace(/[^a-z0-9]+/g," ").trim().slice(0,90);
-function buildPapers(works, pmItems, authorIds, name, hint, strict){
+function buildPapers(works, pmItems, authorIds, name, hint, strict, includeElsewhere=false){
   const idset = new Set(authorIds.map(shortId));
   const p = parseName(name);
   const papers=[], byDoi=new Map(), byPmid=new Map(), byTitle=new Map();
-  let droppedStrict=0;
+  let droppedStrict=0, droppedElsewhere=0; const dropped=new Set();
   for(const w of works){
     if(EXCLUDE_TYPES.has(w.type)) continue;
     const mine = (w.authorships||[]).find(a=>idset.has(shortId(a.author?.id)));
-    if(strict && hint){
+    if(hint){
       const affText = mine ? [...(mine.institutions||[]).map(i=>i.display_name),...(mine.raw_affiliation_strings||[])].join(" | ") : "";
-      if(!instMatches(affText,hint)){ droppedStrict++; continue; }
+      const listed = affText.trim().length>0, ok = instMatches(affText,hint);
+      if(listed && !ok && !includeElsewhere){ droppedElsewhere++; dropped.add(w.ids?.pmid?String(w.ids.pmid).replace(/\D/g,""):""); if(w.doi) dropped.add(w.doi.replace("https://doi.org/","").toLowerCase()); dropped.add(normTitle(w.display_name)); continue; }
+      if(!listed && strict){ droppedStrict++; continue; }
     }
     const doi = w.doi ? w.doi.replace("https://doi.org/","").toLowerCase() : null;
     const pmid = w.ids?.pmid ? String(w.ids.pmid).replace(/\D/g,"") : null;
@@ -476,6 +485,7 @@ function buildPapers(works, pmItems, authorIds, name, hint, strict){
     const doi = (it.articleids||[]).find(a=>a.idtype==="doi")?.value?.toLowerCase();
     const ex = byPmid.get(pmid) || (doi && byDoi.get(doi)) || byTitle.get(normTitle(it.title));
     if(ex){ if(!ex.src.includes("PubMed")) ex.src.push("PubMed"); if(!ex.pmid) ex.pmid=pmid; continue; }
+    if(dropped.has(pmid) || (doi && dropped.has(doi)) || dropped.has(normTitle(it.title))) continue;
     if(strict && works.length) continue; // strict mode trusts OpenAlex affiliations only
     const authors = (it.authors||[]).filter(a=>a.authtype==="Author").map(a=>a.name);
     const meKey = (p.last+" "+p.first[0]).toLowerCase();
@@ -493,7 +503,7 @@ function buildPapers(works, pmItems, authorIds, name, hint, strict){
     pmOnly++;
   }
   papers.sort((a,b)=>(b.date||"").localeCompare(a.date||""));
-  return {papers, pmOnly, droppedStrict};
+  return {papers, pmOnly, droppedStrict, droppedElsewhere};
 }
 
 /* ---------------- Analysis ---------------- */
@@ -586,7 +596,7 @@ async function runSearch(reuse=false){
   const name = $("#nameInput").value.trim(); if(!name){ setStatus('<span class="warn">Type a professor\'s name first.</span>'); return; }
   const hint = $("#instInput").value.trim();
   const yrs = +$("#yearsSel").value, toYear = new Date().getFullYear(), fromYear = toYear - yrs + 1;
-  const strict = $("#strictAff").checked;
+  const strict = $("#strictAff").checked, inclElse = $("#inclElsewhere").checked;
   document.querySelectorAll(".chip").forEach(c=>c.classList.toggle("on", c.dataset.name===name));
   $("#compare").classList.add("hidden");
   setStatus(`Looking up ${esc(name)}…`, true);
@@ -599,12 +609,12 @@ async function runSearch(reuse=false){
   try{ setStatus(`Cross-checking PubMed…`, true); pm = await pubmedSearch(name, hint, fromYear); }
   catch(e){ if(oaErr){ setStatus(`<span class="err">Couldn't reach OpenAlex or PubMed (${esc(e.message)}). If you opened this inside a chat preview, open it in a normal browser tab instead.</span>`); return; } }
   const sel = cands.filter(c=>c.selected);
-  const {papers, pmOnly, droppedStrict} = buildPapers(works, pm.items, sel.map(c=>c.id), name, hint, strict);
+  const {papers, pmOnly, droppedStrict, droppedElsewhere} = buildPapers(works, pm.items, sel.map(c=>c.id), name, hint, strict, inclElse);
   if(!papers.length){
     setStatus(`<span class="warn">No papers found for ${esc(name)} since ${fromYear}${hint?` with “${esc(hint)}”`:""}. Try the full name with middle initial, a different institution hint, or open the profile list below.</span>`);
   }
   const A = analyze(papers, fromYear, toYear);
-  STATE = {name, hint, fromYear, toYear, cands, papers, A, pm, oaErr, pmOnly, droppedStrict, strict};
+  STATE = {name, hint, fromYear, toYear, cands, papers, A, pm, oaErr, pmOnly, droppedStrict, droppedElsewhere, strict, inclElse};
   render();
   let msg = `Found ${papers.length} papers for ${esc(name)} from ${fromYear} to today.`;
   if(oaErr) msg += ` <span class="warn">OpenAlex didn't answer (${esc(oaErr.status===401||oaErr.status===403||oaErr.status===409||oaErr.status===429?"add or check your free API key in Data settings":oaErr.message)}), so this uses PubMed only: no citation counts or themes.</span>`;
@@ -629,7 +639,7 @@ function render(){
   $("#candList").innerHTML = S.cands.slice(0,12).map((c,i)=>`<label class="cand"><input type="checkbox" id="cand${i}" ${c.selected?"checked":""}>
     <span><b>${esc(c.display_name)}</b> · ${fmt(c.works_count)} works · ${fmt(c.cited_by_count)} citations · h-index ${c.summary_stats?.h_index??"–"}<br>
     <span class="note">${esc(c.insts.slice(0,3).join("; ")||"no institution listed")}${c.topics?.[0]?` · ${esc(c.topics[0].display_name)}`:""}</span></span></label>`).join("");
-  $("#strictAff").checked = S.strict;
+  $("#strictAff").checked = S.strict; $("#inclElsewhere").checked = S.inclElse;
 
   // KPIs
   const h = sel.length ? Math.max(...sel.map(c=>c.summary_stats?.h_index||0)) : null;
@@ -664,6 +674,7 @@ function render(){
   }
   const src = [`${S.papers.filter(p=>p.src.includes("OpenAlex")).length} from OpenAlex`, `${S.pm.count} PubMed hits for this name + affiliation`];
   if(S.pmOnly) src.push(`${S.pmOnly} added from PubMed that OpenAlex missed`);
+  if(S.droppedElsewhere) src.push(`${S.droppedElsewhere} hidden because the author was listed at another institution (see "Author profiles matched")`);
   if(S.droppedStrict) src.push(`${S.droppedStrict} excluded by the strict-affiliation filter`);
   b.push(`<span class="note">Sources: ${src.join(" · ")}.</span>`);
   $("#summaryList").innerHTML = b.map(x=>`<li>${x}</li>`).join("");
@@ -700,7 +711,7 @@ function filtered(){
 function renderTable(keep){
   if(!STATE) return; if(keep!==true) shown=25; const all = filtered(), rows = all.slice(0,shown);
   $("#pubTable tbody").innerHTML = rows.map(p=>`<tr>
-    <td><div class="ptitle">${esc(p.title)}</div><div class="pmeta">${esc(p.venue)}${p.type&&p.type!=="article"?` · ${esc(p.type.split(",")[0])}`:""} · ${p.nAuthors} authors${p.oa?' · <span class="tag">open access</span>':""}</div></td>
+    <td><div class="ptitle">${esc(p.title)}</div><div class="pmeta">${esc(p.venue)}${p.type&&p.type!=="article"?` · ${esc(p.type.split(",")[0])}`:""} · ${p.nAuthors} authors${p.oa?' · <span class="tag">open access</span>':""}${p.src.length===1&&p.src[0]==="PubMed"?' · <span class="tag">PubMed only</span>':""}</div></td>
     <td class="n">${p.year||""}</td><td class="col-hide">${roleLabel(p.role)}</td><td class="n">${p.cites==null?"–":fmt(p.cites)}</td>
     <td class="col-hide" style="white-space:nowrap">${scholarLink(p)}${p.doi?` · <a href="https://doi.org/${esc(p.doi)}" target="_blank" rel="noopener">DOI</a>`:""}${p.pmid?` · <a href="https://pubmed.ncbi.nlm.nih.gov/${p.pmid}/" target="_blank" rel="noopener">PubMed</a>`:""}</td></tr>`).join("");
   $("#tableNote").textContent = `${rows.length} of ${all.length} papers shown${all.length<STATE.papers.length?` (filtered from ${STATE.papers.length})`:""}.`;

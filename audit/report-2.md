@@ -1,0 +1,124 @@
+# Live audit — 2026-11-01T17:26:45.216Z
+- CORS OpenAlex: HTTP 200, allow-origin=*, allow-headers=Accept, Accept-Language, Accept-Encoding, Authorization, Content-Type, X-OpenAlex-UI, X-Impersonate-User
+- CORS NCBI esearch: HTTP 200, allow-origin=*, allow-headers=null
+- CORS NCBI efetch: HTTP 200, allow-origin=*, allow-headers=null
+- CORS S2 batch preflight: HTTP 204, allow-origin=*, allow-headers=content-type,x-api-key,authorization,x-amz-security-token,x-amz-date
+Window 2022–2026, hint "Brown University", OpenAlex key: NO
+
+## Lei Wei
+- OpenAlex candidates (21):
+  - [x] (recent) Wei Lei — 444 works, 8744 cites, h=53 — Xijing Hospital; Air Force Medical University; National Natural Science Foundation of Chin — topic: Spinal Fractures and Fixation Techniques
+  - [x] (recent) Lei Wei — 1 works, 12 cites, h=1 — Brown University — topic: Osteoarthritis Treatment and Mechanisms
+  - [x] (recent) Lei Wei — 1 works, 0 cites, h=0 — Shanxi Medical University; Brown University; Rhode Island Hospital — topic: Osteoarthritis Treatment and Mechanisms
+  - [x] (recent) Lei Wei — 1 works, 0 cites, h=0 — Brown University; Rhode Island Hospital — topic: Bone health and osteoporosis research
+  - [x] (recent) Lei Wei — 1 works, 0 cites, h=0 — Brown University — topic: MicroRNA in disease regulation
+  - [ ] (ever) Lei Wei — 162 works, 12530 cites, h=37 — Roswell Park Comprehensive Cancer Center; Chongqing University; Chongqing Medical Universi — topic: Cancer Genomics and Diagnostics
+  - [ ] (ever) Lei Wei — 139 works, 3341 cites, h=30 — Central Hospital of Zibo; Centre National de la Recherche Scientifique; St. Jude Children' — topic: Cancer-related molecular mechanisms research
+  - [ ] (ever) Lei Wei — 75 works, 429 cites, h=10 — Third Affiliated Hospital of Sun Yat-sen University; Tianjin University of Traditional Chi — topic: Cancer Genomics and Diagnostics
+- PubMed: 12 hits · term: `"Wei, Lei"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
+- RESULT: 8 papers (OpenAlex raw 75, hidden-elsewhere 67, hidden-unverified 1, PubMed-only added 4, PubMed rejected 0, S2 citations ok=true)
+- Profile purity: A5158500398=100%, A5145974587=100%, A5090657375=4%, A5136600835=100%
+- Roles: last 4 / first 0 / middle 4 · cites 105 · per year 1.6
+- Per year: 2022:1 2023:3 2024:1 2025:2 2026:1
+- Topics: Osteoarthritis Treatment and Mechanisms (3); Bone Metabolism and Diseases (1)
+- Venues: Connective Tissue Research (1); Research (Washington, D.C.) (1); The Journal of pharmacology and experimental therapeutics (1); The American journal of sports medicine (1); Biomolecules (1)
+- Coauthors: Changqi Sun (4); Brett D. Owens (4); Fei Zhang (3); Kenny Chang (3); Braden C. Fleming (3); Jillian E. Beveridge (3)
+- Duplicate titles left: 0
+- Author affiliation on raw works: Xijing Hospital: 36; MATCH: 6; Beijing Institute of Technology: 5; Fudan University: 4; Wuhan University: 2; The First People's Hospital of Shunde: 2; Southern Medical University: 2; Air Force Medical University: 2
+- Sample hidden papers:
+  - 2026 · An ultrasound-activated PLLA@BaTiO3&SF Janus membrane enhances fracture healing  · [Xijing Hospital | Air Force Medical University | Analysis & Testing Laboratory f]
+  - 2025 · Sustainable clinical translation: development of implantable energy systems · [Xijing Hospital | Air Force Medical University | Correspondence to: Dr. Wei Lei,]
+  - 2025 · Harmine attenuates renal fibrosis via Twist1 suppression: A novel anti-fibrotic  · [Xijing Hospital | Air Force Medical University | Department of Nephrology, Xijin]
+  - 2025 · Microstructural–functional coupling as a multimodal biomarker of emotional state · [Fudan University | Institute of Science and Technology for Brain-Inspired Intell]
+  - 2025 · LINC00885 promotes lung squamous cell carcinoma by upregulating SLBP expression  · [Nanjing General Hospital of Nanjing Military Command | Nanjing University | Depa]
+  - 2025 · Corrigendum to ‘BMSCs-targeting piezoelectric stimulation and immunomodulatory d · [Xijing Hospital | Air Force Medical University | Department of Orthopedics, Xiji]
+- Sample PubMed-only papers:
+  - 2025 · B-Lymphoid Tyrosine Kinase Crosslinks Redox and Apoptosis Signaling Networks to Promote th · Research (Washington, D.C.) · role middle
+  - 2025 · The protective effect of irisin against hemorrhagic injury is mediated by PI3K and p38 pat · The Journal of pharmacology and experime · role middle
+  - 2024 · Alpha-2-Macroglobulin Attenuates Posttraumatic Osteoarthritis Cartilage Damage by Inhibiti · The American journal of sports medicine · role last
+  - 2023 · FAR591 promotes the pathogenesis and progression of SONFH by regulating Fos expression to  · Bone research · role middle
+- Most recent kept:
+  - 2026 · Osteoclast-lineage Indian hedgehog sustains RANKL-induced osteoclastogenesis and bone reso · Connective Tissue Research · middle · cites 0 · OpenAlex+PubMed
+  - 2025 · B-Lymphoid Tyrosine Kinase Crosslinks Redox and Apoptosis Signaling Networks to Promote th · Research (Washington, D.C.) · middle · cites 10 · PubMed
+  - 2025 · The protective effect of irisin against hemorrhagic injury is mediated by PI3K and p38 pat · The Journal of pharmacology and experime · middle · cites 0 · PubMed
+  - 2024 · Alpha-2-Macroglobulin Attenuates Posttraumatic Osteoarthritis Cartilage Damage by Inhibiti · The American journal of sports medicine · last · cites 12 · PubMed
+  - 2023 · The Effects of an Osteoarthritic Joint Environment on ACL Damage and Degeneration: A Yucat · Biomolecules · last · cites 0 · OpenAlex+PubMed
+
+## Gregory D. Jay
+- OpenAlex candidates (3):
+  - [x] (recent) Gregory D. Jay — 390 works, 20123 cites, h=73 — Brown University; Rhode Island Hospital; University of Massachusetts Dartmouth — topic: Osteoarthritis Treatment and Mechanisms
+  - [ ]  Jay D. Gregory — 1 works, 6 cites, h=1 — University of Tennessee at Knoxville — topic: Metal complexes synthesis and properties
+  - [ ]  GREGORY D. JAY — 1 works, 0 cites, h=0 —  — topic: -
+- PubMed: 28 hits · term: `("Jay, Gregory"[fau] OR "Jay, Gregory D"[fau]) AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
+- RESULT: 31 papers (OpenAlex raw 33, hidden-elsewhere 1, hidden-unverified 0, PubMed-only added 0, PubMed rejected 0)
+- Profile purity: A5078086926=97%
+- Roles: last 9 / first 0 / middle 22 · cites 295 · per year 6.3
+- Per year: 2022:6 2023:8 2024:7 2025:3 2026:7
+- Topics: Osteoarthritis Treatment and Mechanisms (9); Proteoglycans and glycosaminoglycans research (3); Intestinal and Peritoneal Adhesions (2); Glycosylation and Glycoproteins Research (2); Digital Imaging for Blood Diseases (2)
+- Venues: Arthritis Research & Therapy (2); Zenodo (CERN European Organization for Nuclear Research) (2); International Journal of Molecular Sciences (2); Frontiers in Molecular Biosciences (2); Lara D. Veeken (1)
+- Coauthors: Tannin A. Schmidt (22); Khaled A. Elsaid (9); Ling X. Zhang (6); Adam P. Tanguay (6); Roman J. Krawetz (5); Ava J. Marks (5)
+- Duplicate titles left: 0
+- Author affiliation on raw works: MATCH: 30; Evernorth Research Institute, Saint Louis, MO, United States: 1; (author not on authorship list!): 1; (none listed): 1
+- Sample hidden papers:
+  - 2024 · Characterization of Patients With Severe Asthma Who Initiated Biologic Treatment · [Evernorth Research Institute, Saint Louis, MO, United States]
+- Most recent kept:
+  - 2026 · Systemic and local autoantibody responses to extracellular matrix proteins define inflamma · Lara D. Veeken · middle · cites 0 · OpenAlex+PubMed
+  - 2026 · Addition of PRG4 to Optimize the Anti-Adhesive Properties of Tissue Barrier Seprafilm® · Annals of Biomedical Engineering · last · cites 0 · OpenAlex+PubMed
+  - 2026 · Addition of PRG4 to Optimize the Anti‑Adhesive Properties of Tissue Barrier Sepraflm® · Chapman University Digital Commons (Chap · last · cites 0 · OpenAlex
+  - 2026 · Lubricin’s Mucin Domain Has Strong Polyproline Type II Helical Character · Computational and Structural Biotechnolo · middle · cites 0 · OpenAlex+PubMed
+  - 2026 · Disruption of proteoglycan 4 (PRG4)-CD44 signaling modulates chronic synovitis in conditio · Arthritis Research & Therapy · last · cites 3 · OpenAlex+PubMed
+
+## Douglas Moore
+- OpenAlex candidates (10):
+  - [x] (recent) Douglas C. Moore — 130 works, 3829 cites, h=37 — Brown University; Hospital for Special Surgery; Cornell University — topic: Orthopedic Surgery and Rehabilitation
+  - [ ]  Douglas Edwin Moore — 97 works, 2735 cites, h=32 — The University of Sydney; National Institutes of Health; Australian Nuclear Science and Te — topic: Photochemistry and Electron Transfer Studies
+  - [ ]  Douglas I. Moore — 61 works, 1399 cites, h=17 — University of New Mexico — topic: Ecology and Vegetation Dynamics Studies
+  - [ ]  Douglas G. Moore — 39 works, 521 cites, h=9 — Tufts University; University of Maryland, Baltimore; Baylor University — topic: Black Holes and Theoretical Physics
+  - [ ]  Douglas F. Moore — 34 works, 1758 cites, h=20 — Orange County Healthcare Agency; The University of Texas MD Anderson Cancer Center; Easter — topic: Fecal contamination and water quality
+  - [ ]  Douglas B. Moore — 26 works, 141 cites, h=5 — Bristol-Myers Squibb (United States); General Motors (United States); Rockwell Internation — topic: Musicology and Musical Analysis
+  - [ ]  Douglas J. Moore — 18 works, 250 cites, h=9 — Cleveland State University; University Hospitals of Cleveland; Case Western Reserve Univer — topic: Psychotherapy Techniques and Applications
+  - [ ]  Douglas R. Moore — 15 works, 91 cites, h=5 — Creighton University; CHI Health Creighton University Medical Center - Bergan Mercy; Hunte — topic: Smoking Behavior and Cessation
+- PubMed: 1 hits · term: `"Moore, Douglas"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
+- RESULT: 15 papers (OpenAlex raw 15, hidden-elsewhere 0, hidden-unverified 0, PubMed-only added 0, PubMed rejected 0)
+- Profile purity: A5022646522=100%
+- Roles: last 2 / first 0 / middle 13 · cites 63 · per year 3.1
+- Per year: 2022:2 2023:2 2024:3 2025:7 2026:1
+- Topics: Orthopedic Surgery and Rehabilitation (9); Orthopaedic implants and arthroplasty (3); Osteoarthritis Treatment and Mechanisms (2); Medical Image Segmentation Techniques (1)
+- Venues: Journal of Biomechanics (4); Journal of Orthopaedic Research® (2); SSRN Electronic Journal (2); Osteoarthritis and Cartilage Open (1); Lubricants (1)
+- Coauthors: Joseph John Crisco (14); Amy M. Morton (8); Arnold‐Peter C. Weiss (6); Amy L. Ladd (6); Janine D. Bacic (4); V. Marinò (3)
+- Duplicate titles left: 0
+- Author affiliation on raw works: MATCH: 15
+- Most recent kept:
+  - 2026 · Small bone replacement leads to greater gait asymmetry, cartilage damage, and osteophyte f · Osteoarthritis and Cartilage Open · middle · cites 0 · OpenAlex
+  - 2025 · Friction and Cartilage Wear in Hemiarthroplasty: A Systematic Review of Key Influencing Fa · Lubricants · middle · cites 0 · OpenAlex
+  - 2025 · In Vivo Evaluation of Hemiarthroplasty Bearing Materials Using Animal Models: A Scoping Re · Journal of Orthopaedic Research® · middle · cites 1 · OpenAlex
+  - 2025 · In Vitro Evaluation of Hemiarthroplasty Bearing Materials: A Scoping Review (Part I) · Journal of Orthopaedic Research® · middle · cites 4 · OpenAlex
+  - 2025 · Development of small bone implants using a mean shape bone in a porcine model for carpal b · Proceedings of the Institution of Mechan · middle · cites 1 · OpenAlex+PubMed
+
+## Anubhav Tripathi
+- OpenAlex candidates (12):
+  - [x] (recent) Anubhav Tripathi — 186 works, 4290 cites, h=29 — Brown University; City College of New York; Nanyang Technological University — topic: Microfluidic and Capillary Electrophoresis Applications
+  - [x] (recent) Anubhav Tripathi — 8 works, 21 cites, h=2 — Brown University — topic: Microfluidic and Capillary Electrophoresis Applications
+  - [ ]  Anubhav Tripathi — 6 works, 12 cites, h=3 — Tribhuvan University; Institute of Agriculture and Animal Science — topic: Genetics and Plant Breeding
+  - [ ]  Anubhav Nath Tripathi — 3 works, 1 cites, h=1 —  — topic: Economic Theory and Policy
+  - [ ]  Tripathi Anubhav — 2 works, 4 cites, h=1 — University of Southern California — topic: Surfactants and Colloidal Systems
+  - [ ]  Anubhav Tripathi — 2 works, 0 cites, h=0 — Integral University — topic: Liver Disease and Transplantation
+  - [ ]  Anubhav Tripathi — 2 works, 0 cites, h=0 —  — topic: Clinical Laboratory Practices and Quality Control
+  - [ ]  ANUBHAV TRIPATHI — 1 works, 0 cites, h=0 —  — topic: Indian and Buddhist Studies
+- PubMed: 36 hits · term: `"Tripathi, Anubhav"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
+- RESULT: 45 papers (OpenAlex raw 47, hidden-elsewhere 0, hidden-unverified 0, PubMed-only added 0, PubMed rejected 0)
+- Profile purity: A5033441436=100%, A5114170879=100%
+- Roles: last 40 / first 0 / middle 5 · cites 281 · per year 9.2
+- Per year: 2022:12 2023:8 2024:11 2025:9 2026:5
+- Topics: Microfluidic and Capillary Electrophoresis Applications (14); Forensic Toxicology and Drug Analysis (4); Genomics and Phylogenetic Studies (2); AI in cancer detection (2); Virus-based gene therapy research (2)
+- Venues: Scientific Reports (4); SLAS TECHNOLOGY (4); The Analyst (3); ACS Omega (3); BMC Genomics (2)
+- Coauthors: Adriana Coll De Peña (9); Ramisa Fariha (8); E. Celeste Welch (7); Emma Rothkopf (6); Kiara Lee (6); John Murphy (6)
+- Duplicate titles left: 0
+- Author affiliation on raw works: MATCH: 46; (none listed): 1
+- Most recent kept:
+  - 2026 · New insight into RNA biomarkers in neuropathic pain: a clinician–neuroscientist roadmap to · Frontiers in Pain Research · last · cites 0 · OpenAlex+PubMed
+  - 2026 · Pathogen to read: a rapid, automated workflow for public health-ready microbial sequencing · BMC Genomics · last · cites 0 · OpenAlex+PubMed
+  - 2026 · Integrated Experimental–Computational Framework for Drug Transport Quantification in 3D Mi · Micromachines · last · cites 0 · OpenAlex+PubMed
+  - 2026 · Comparative Evaluation of HepG2 Spheroid Generation Methods for Toxicology · Cellular and Molecular Bioengineering · last · cites 0 · OpenAlex+PubMed
+  - 2026 · HIV diagnostic implementation in the Dominican Republic: an in-depth qualitative context a · BMJ Open · middle · cites 0 · OpenAlex+PubMed
+

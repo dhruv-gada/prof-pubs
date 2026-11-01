@@ -1,4 +1,4 @@
-# Live audit — 2026-11-01T17:26:44.343Z
+# Live audit — 2026-11-01T17:28:46.014Z
 - CORS OpenAlex: HTTP 200, allow-origin=*, allow-headers=Accept, Accept-Language, Accept-Encoding, Authorization, Content-Type, X-OpenAlex-UI, X-Impersonate-User
 - CORS NCBI esearch: HTTP 200, allow-origin=*, allow-headers=null
 - CORS NCBI efetch: HTTP 200, allow-origin=*, allow-headers=null
@@ -6,7 +6,7 @@
 Window 2022–2026, hint "Brown University", OpenAlex key: NO
 
 ## Qian Chen
-- OpenAlex candidates (35):
+- OpenAlex candidates (32):
   - [x] (recent) Qian Chen — 170 works, 1690 cites, h=21 — Capital Medical University; Beijing Friendship Hospital; Philadelphia College of Osteopath — topic: Functional Brain Connectivity Studies
   - [x] (recent) Qian Chen — 53 works, 724 cites, h=15 — Children's Hospital of Chongqing Medical University; Jiangsu University; Xuzhou Medical Co — topic: Osteoarthritis Treatment and Mechanisms
   - [x] (recent) Qian Chen — 31 works, 647 cites, h=13 — Xizang Minzu University; University of Wisconsin–Madison; State Grid Corporation of China  — topic: Liver Disease Diagnosis and Treatment
@@ -15,8 +15,8 @@ Window 2022–2026, hint "Brown University", OpenAlex key: NO
   - [x] (recent) Qian Chen — 3 works, 13 cites, h=2 — Dalian University of Technology; Brown University; State Key Laboratory of Fine Chemicals — topic: Catalytic Processes in Materials Science
   - [ ] (ever) Qian Chen — 1469 works, 29205 cites, h=77 — East China University of Science and Technology; University of Illinois Urbana-Champaign;  — topic: Digital Holography and Microscopy
   - [ ] (ever) Qian Chen — 524 works, 5382 cites, h=40 — University of Southern California; Houston Methodist; Guilin Medical University — topic: Aquatic Ecosystems and Phytoplankton Dynamics
-- PubMed: 12 hits · term: `"Chen, Qian"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
-- RESULT: 12 papers (OpenAlex raw 155, hidden-elsewhere 142, hidden-unverified 3, PubMed-only added 5, PubMed rejected 1, S2 citations ok=true)
+- PubMed: 18 hits · term: `"Chen, Qian*"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
+- RESULT: 12 papers (OpenAlex raw 155, hidden-elsewhere 142, hidden-unverified 3, PubMed-only added 5, PubMed rejected 7, S2 citations ok=true)
 - Profile purity: A5026302891=22%, A5070487819=0%, A5100737732=10%, A5125282330=33%, A5111166011=14%, A5101910142=0%
 - Roles: last 9 / first 0 / middle 3 · cites 67 · per year 2.4
 - Per year: 2022:2 2023:3 2024:1 2025:3 2026:3
@@ -49,7 +49,7 @@ Window 2022–2026, hint "Brown University", OpenAlex key: NO
 - OpenAlex candidates (2):
   - [x] (recent) Eric M. Darling — 106 works, 5632 cites, h=29 — Brown University; Duke University; Rhode Island Hospital — topic: Cellular Mechanics and Interactions
   - [ ]  Eric John Darling — 6 works, 66 cites, h=2 — University of Southern Queensland — topic: Construction Project Management and Performance
-- PubMed: 0 hits · term: `"Darling, Eric"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
+- PubMed: 6 hits · term: `"Darling, Eric*"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
 - RESULT: 10 papers (OpenAlex raw 11, hidden-elsewhere 0, hidden-unverified 0, PubMed-only added 0, PubMed rejected 0)
 - Profile purity: A5053646968=100%
 - Roles: last 4 / first 0 / middle 6 · cites 47 · per year 2.0
@@ -60,22 +60,22 @@ Window 2022–2026, hint "Brown University", OpenAlex key: NO
 - Duplicate titles left: 0
 - Author affiliation on raw works: MATCH: 9; (none listed): 2
 - Most recent kept:
-  - 2026 · Estimating single-cell elastic modulus in a serial microfluidic cytometer from time-of-fli · Lab on a Chip · middle · cites 0 · OpenAlex
-  - 2025 · Identifying Immunomodulatory Subpopulations of Adipose Stromal Vascular Fraction and Stem/ · Stem Cell Reviews and Reports · last · cites 4 · OpenAlex
-  - 2024 · Selection of Force Sensors for In Situ Measurement of Neotissue Microenvironments · Tissue Engineering Part A · last · cites 2 · OpenAlex
-  - 2023 · Microparticles with tunable, cell-like properties for quantitative acoustic mechanophenoty · Microsystems & Nanoengineering · middle · cites 7 · OpenAlex
-  - 2022 · Chondrogenesis of Adipose-Derived Stem Cells Using an Arrayed Spheroid Format · Cellular and Molecular Bioengineering · last · cites 4 · OpenAlex
+  - 2026 · Estimating single-cell elastic modulus in a serial microfluidic cytometer from time-of-fli · Lab on a Chip · middle · cites 0 · OpenAlex+PubMed
+  - 2025 · Identifying Immunomodulatory Subpopulations of Adipose Stromal Vascular Fraction and Stem/ · Stem Cell Reviews and Reports · last · cites 4 · OpenAlex+PubMed
+  - 2024 · Selection of Force Sensors for In Situ Measurement of Neotissue Microenvironments · Tissue Engineering Part A · last · cites 2 · OpenAlex+PubMed
+  - 2023 · Microparticles with tunable, cell-like properties for quantitative acoustic mechanophenoty · Microsystems & Nanoengineering · middle · cites 7 · OpenAlex+PubMed
+  - 2022 · Chondrogenesis of Adipose-Derived Stem Cells Using an Arrayed Spheroid Format · Cellular and Molecular Bioengineering · last · cites 4 · OpenAlex+PubMed
 
 ## Joseph J. Crisco
 - OpenAlex candidates (1):
   - [x] (recent) Joseph John Crisco — 346 works, 16803 cites, h=68 — Brown University; Rhode Island Hospital; Rutgers, The State University of New Jersey — topic: Orthopedic Surgery and Rehabilitation
-- PubMed: 28 hits · term: `("Crisco, Joseph"[fau] OR "Crisco, Joseph J"[fau]) AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
+- PubMed: 28 hits · term: `"Crisco, Joseph*"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
 - RESULT: 32 papers (OpenAlex raw 30, hidden-elsewhere 0, hidden-unverified 0, PubMed-only added 3, PubMed rejected 0, S2 citations ok=true)
 - Profile purity: A5019062338=100%
 - Roles: last 15 / first 5 / middle 12 · cites 115 · per year 6.5
 - Per year: 2022:7 2023:3 2024:8 2025:9 2026:5
 - Topics: Orthopedic Surgery and Rehabilitation (16); Orthopaedic implants and arthroplasty (4); Medical Image Segmentation Techniques (3); Traumatic Brain Injury Research (2); Osteoarthritis Treatment and Mechanisms (1)
-- Venues: Journal of Biomechanics (7); Journal of Orthopaedic Research® (3); The Journal Of Hand Surgery (2); SSRN Electronic Journal (2); Hand (New York, N.Y.) (2)
+- Venues: Journal of Biomechanics (7); Journal of Orthopaedic Research® (3); The Journal Of Hand Surgery (2); Hand (New York, N.Y.) (2); Frontiers in Bioengineering and Biotechnology (1)
 - Coauthors: Amy M. Morton (15); Douglas C. Moore (14); Amy L. Ladd (10); Janine D. Bacic (9); Arnold‐Peter C. Weiss (9); Rohit Badida (6)
 - Duplicate titles left: 0
 - Author affiliation on raw works: MATCH: 29; (none listed): 1
@@ -94,11 +94,11 @@ Window 2022–2026, hint "Brown University", OpenAlex key: NO
 - OpenAlex candidates (2):
   - [x] (recent) Brett D. Owens — 540 works, 20882 cites, h=74 — Washington University in St. Louis; Brown University; Rhode Island Hospital — topic: Shoulder Injury and Treatment
   - [ ]  B. Owens — 11 works, 19 cites, h=2 — Virginia Mason Medical Center; University of Washington; Northern General Hospital — topic: Anesthesia and Pain Management
-- PubMed: 99 hits · term: `("Owens, Brett"[fau] OR "Owens, Brett D"[fau]) AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
-- RESULT: 132 papers (OpenAlex raw 127, hidden-elsewhere 5, hidden-unverified 0, PubMed-only added 10, PubMed rejected 0, S2 citations ok=false)
+- PubMed: 99 hits · term: `"Owens, Brett*"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
+- RESULT: 131 papers (OpenAlex raw 127, hidden-elsewhere 5, hidden-unverified 0, PubMed-only added 9, PubMed rejected 1, S2 citations ok=true)
 - Profile purity: A5006184906=96%
-- Roles: last 65 / first 8 / middle 59 · cites 802 · per year 26.8
-- Per year: 2022:28 2023:30 2024:40 2025:20 2026:14
+- Roles: last 64 / first 8 / middle 59 · cites 940 · per year 26.6
+- Per year: 2022:27 2023:30 2024:40 2025:20 2026:14
 - Topics: Shoulder Injury and Treatment (43); Knee injuries and reconstruction techniques (23); Sports injuries and prevention (14); Osteoarthritis Treatment and Mechanisms (9); Lower Extremity Biomechanics and Pathologies (5)
 - Venues: Orthopaedic Journal of Sports Medicine (24); The American Journal of Sports Medicine (22); Arthroscopy Sports Medicine and Rehabilitation (8); Rhode Island medical journal (2013) (8); Sports Health A Multidisciplinary Approach (6)
 - Coauthors: Edward J. Testa (30); Matthew S. Quinn (21); Rory A. Byrne (21); James Alex Albright (20); Stephen E. Marcaccio (16); Nicholas J. Lemme (16)
@@ -117,7 +117,7 @@ Window 2022–2026, hint "Brown University", OpenAlex key: NO
   - 2023 · Tunnel Management in Revision Anterior Cruciate Ligament Reconstruction: Current Concepts · The American journal of sports medicine · role middle
   - 2022 · Epidemiology of rugby-related fractures in high school- and college-aged players in the Un · The Physician and sportsmedicine · role last
 - Most recent kept:
-  - 2026 · Evaluation, Management, and Return-To-Sport Guidelines for Cervical Spine Injuries in Athl · Global spine journal · middle · cites - · PubMed
+  - 2026 · Evaluation, Management, and Return-To-Sport Guidelines for Cervical Spine Injuries in Athl · Global spine journal · middle · cites 0 · PubMed
   - 2026 · From Degeneration to Regeneration: The Evolving Landscape of Cell-Based Tendon Repair · Cells · middle · cites 0 · OpenAlex+PubMed
   - 2026 · The Rise of Remplissage · The American Journal of Sports Medicine · first · cites 0 · OpenAlex
   - 2026 · Poster 211. Development and Validation of The BRACE (Bankart Risk Assessment & Clinical Es · Orthopaedic Journal of Sports Medicine · middle · cites 0 · OpenAlex

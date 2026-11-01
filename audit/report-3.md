@@ -1,4 +1,4 @@
-# Live audit — 2026-11-01T17:26:43.986Z
+# Live audit — 2026-11-01T17:28:44.618Z
 - CORS OpenAlex: HTTP 200, allow-origin=*, allow-headers=Accept, Accept-Language, Accept-Encoding, Authorization, Content-Type, X-OpenAlex-UI, X-Impersonate-User
 - CORS NCBI esearch: HTTP 200, allow-origin=*, allow-headers=null
 - CORS NCBI efetch: HTTP 200, allow-origin=*, allow-headers=null
@@ -6,16 +6,16 @@
 Window 2022–2026, hint "Brown University", OpenAlex key: NO
 
 ## Wentian Yang
-- OpenAlex candidates (10):
+- OpenAlex candidates (8):
   - [x] (recent) Wentian Yang — 61 works, 4362 cites, h=32 — Brown University; Rhode Island Hospital; Hospital for Special Surgery — topic: Protein Tyrosine Phosphatases
   - [x] (recent) Wentian Yang — 1 works, 1 cites, h=1 — Brown University — topic: Rheumatoid Arthritis Research and Therapies
   - [ ]  Wentian Yang — 2 works, 7 cites, h=1 — Qingdao Agricultural University — topic: Remote Sensing in Agriculture
-  - [ ]  Yang Wentian — 2 works, 0 cites, h=0 —  — topic: Research on Leishmaniasis Studies
   - [ ]  Wentian Yang — 1 works, 6 cites, h=1 — Shandong Agricultural University — topic: Adsorption and biosorption for pollutant removal
   - [ ]  Wentian Yang — 1 works, 0 cites, h=0 — Dalian University of Technology — topic: Neural Networks and Applications
   - [ ]  wentian yang — 1 works, 0 cites, h=0 —  — topic: Video Surveillance and Tracking Methods
   - [ ]  Wentian Yang — 1 works, 0 cites, h=0 — Shandong Agricultural University — topic: Polymer composites and self-healing
-- PubMed: 6 hits · term: `"Yang, Wentian"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
+  - [ ]  Wentian Yang — 1 works, 0 cites, h=0 — University of Jinan — topic: Dynamics and Control of Mechanical Systems
+- PubMed: 6 hits · term: `"Yang, Wentian*"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
 - RESULT: 7 papers (OpenAlex raw 7, hidden-elsewhere 0, hidden-unverified 0, PubMed-only added 0, PubMed rejected 0)
 - Profile purity: A5143767883=100%, A5071869928=100%
 - Roles: last 3 / first 1 / middle 3 · cites 64 · per year 1.4
@@ -36,10 +36,10 @@ Window 2022–2026, hint "Brown University", OpenAlex key: NO
 - OpenAlex candidates (2):
   - [x] (recent) Braden C. Fleming — 324 works, 16152 cites, h=75 — Brown University; Rhode Island Hospital; University of Vermont — topic: Knee injuries and reconstruction techniques
   - [ ]  Braden C. Fleming — 2 works, 0 cites, h=0 — Murdoch University — topic: Animal Nutrition and Physiology
-- PubMed: 35 hits · term: `("Fleming, Braden"[fau] OR "Fleming, Braden C"[fau]) AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
-- RESULT: 43 papers (OpenAlex raw 48, hidden-elsewhere 7, hidden-unverified 0, PubMed-only added 3, PubMed rejected 0, S2 citations ok=false)
+- PubMed: 35 hits · term: `"Fleming, Braden*"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
+- RESULT: 43 papers (OpenAlex raw 48, hidden-elsewhere 7, hidden-unverified 0, PubMed-only added 3, PubMed rejected 0, S2 citations ok=true)
 - Profile purity: A5010258663=84%
-- Roles: last 12 / first 4 / middle 27 · cites 268 · per year 8.7
+- Roles: last 12 / first 4 / middle 27 · cites 298 · per year 8.7
 - Per year: 2022:16 2023:9 2024:7 2025:7 2026:4
 - Topics: Knee injuries and reconstruction techniques (25); Osteoarthritis Treatment and Mechanisms (10); Medical Image Segmentation Techniques (2); Pharmaceutical studies and practices (1); Elasticity and Material Modeling (1)
 - Venues: The American Journal of Sports Medicine (10); Orthopaedic Journal of Sports Medicine (6); Journal of Orthopaedic Research® (5); Bioengineering (3); PLoS ONE (3)
@@ -75,14 +75,14 @@ Window 2022–2026, hint "Brown University", OpenAlex key: NO
   - [x] (recent) Alan H. Daniels — 1 works, 0 cites, h=0 — Brown University — topic: Musculoskeletal pain and rehabilitation
   - [ ]  Alan H. Daniels — 2 works, 1 cites, h=1 —  — topic: Wind Energy Research and Development
   - [ ]  Alan H Daniels — 1 works, 0 cites, h=0 —  — topic: Spinal Fractures and Fixation Techniques
-- PubMed: 431 hits · term: `("Daniels, Alan"[fau] OR "Daniels, Alan H"[fau]) AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
-- RESULT: 422 papers (OpenAlex raw 0, hidden-elsewhere 0, hidden-unverified 0, PubMed-only added 422, PubMed rejected 2, S2 citations ok=false)
+- PubMed: 431 hits · term: `"Daniels, Alan*"[fau] AND ("Brown University"[ad] OR "Rhode Island Hospital"[ad] OR "Lifespan"[ad] OR "Brown Health"[ad] OR "Miriam Hospital"[ad] OR "Providence, RI"[ad]) AND ("2022/01/01"[dp] : "3000"[dp])`
+- RESULT: 384 papers (OpenAlex raw 0, hidden-elsewhere 0, hidden-unverified 0, PubMed-only added 384, PubMed rejected 40, S2 citations ok=false)
 - Profile purity: 
-- Roles: last 174 / first 18 / middle 230 · cites 2785 · per year 85.8
-- Per year: 2022:46 2023:68 2024:88 2025:100 2026:120
+- Roles: last 149 / first 18 / middle 217 · cites 0 · per year 78.1
+- Per year: 2022:38 2023:61 2024:82 2025:93 2026:110
 - Topics: 
-- Venues: Spine (71); Journal of neurosurgery. Spine (30); The Journal of bone and joint surgery. American volume (22); Spine deformity (22); The Journal of the American Academy of Orthopaedic Surgeons (21)
-- Coauthors: Bassel G Diebo (231); Peter Gust Passias (121); Virginie Lafage (120); Mohammad Daher (113); Renaud Lafage (111); Justin S Smith (109)
+- Venues: Spine (64); Journal of neurosurgery. Spine (30); Spine deformity (22); World neurosurgery (21); The spine journal : official journal of the North American Spine Society (17)
+- Coauthors: Bassel G Diebo (215); Peter Gust Passias (119); Virginie Lafage (119); Renaud Lafage (110); Justin S Smith (109); Christopher I Shaffrey (109)
 - Duplicate titles left: 0
 - Author affiliation on raw works: 
 - Sample PubMed-only papers:
@@ -92,9 +92,9 @@ Window 2022–2026, hint "Brown University", OpenAlex key: NO
   - 2026 · Prevalence of severe sagittal malalignment in patients undergoing short-segment lumbar fus · European spine journal : official public · role last
   - 2026 · Is There a Cervical Alignment Threshold Warranting Cervical Inclusion in the Construct? · Neurosurgery · role middle
 - Most recent kept:
-  - 2026 · Alignment Factors Associated With the Need for Revision Extension Surgery to the Sacrum Af · Spine · last · cites 0 · PubMed
-  - 2026 · The Reply · The American journal of medicine · last · cites 0 · PubMed
-  - 2026 · Analysis of Success Versus Poor Realignment in Patients With Cervical Deformity : In-Const · Spine · middle · cites 0 · PubMed
-  - 2026 · Prevalence of severe sagittal malalignment in patients undergoing short-segment lumbar fus · European spine journal : official public · last · cites 0 · PubMed
-  - 2026 · Is There a Cervical Alignment Threshold Warranting Cervical Inclusion in the Construct? · Neurosurgery · middle · cites 0 · PubMed
+  - 2026 · Alignment Factors Associated With the Need for Revision Extension Surgery to the Sacrum Af · Spine · last · cites - · PubMed
+  - 2026 · The Reply · The American journal of medicine · last · cites - · PubMed
+  - 2026 · Analysis of Success Versus Poor Realignment in Patients With Cervical Deformity : In-Const · Spine · middle · cites - · PubMed
+  - 2026 · Prevalence of severe sagittal malalignment in patients undergoing short-segment lumbar fus · European spine journal : official public · last · cites - · PubMed
+  - 2026 · Is There a Cervical Alignment Threshold Warranting Cervical Inclusion in the Construct? · Neurosurgery · middle · cites - · PubMed
 

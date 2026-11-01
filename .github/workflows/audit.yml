@@ -1,0 +1,28 @@
+name: Live data audit
+on:
+  push:
+    paths: ["tools/**", ".github/workflows/audit.yml", "index.html"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install --no-save jsdom@24
+      - run: mkdir -p audit && node tools/audit.mjs > audit/report.md 2> audit/stderr.txt || true
+        env:
+          OPENALEX_KEY: ${{ secrets.OPENALEX_KEY }}
+          EXTRA_NAMES: ${{ vars.EXTRA_NAMES }}
+      - name: Commit report
+        run: |
+          git config user.name "audit-bot"
+          git config user.email "audit-bot@users.noreply.github.com"
+          git add audit
+          git commit -m "Audit report [skip ci]" || exit 0
+          git pull --rebase origin main
+          git push
